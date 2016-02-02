@@ -1,0 +1,220 @@
+<!doctype html>
+<html class="no-js ng-landing-html">
+  <head>
+    <title>MEANr - a MEAN relational stack</title>
+	<meta name="description" content="A Mysql Express Angular Node relational stack">
+	<meta property="og:title" content="MEANr - a MEAN relational stack" />
+	<meta property="og:description" content="A Mysql Express Angular Node relational stack" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://meanr.io" />
+	<meta property="og:image" content="https://meanr.io/images/meanr-icon-128.png" />
+	<meta property="og:site_name" content="MEANr" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <base href="/#!">
+    	<style>
+	  .ng-landing-html {
+		background: #6B728A;
+		height: 100%;
+		display: table;
+		margin: auto;
+	  }
+	  .ng-landing-body {
+		background: #6B728A;
+		height: 100%;
+		display: table-cell;
+		vertical-align: middle;
+	  }
+	  .ng-landing {
+		color: #fff;
+	  }
+	  .sk-spinner-pulse {
+		width: 40px;
+		height: 40px;
+		margin: 40px auto;
+		background-color: #fff;
+		border-radius: 100%;
+		-webkit-animation: sk-pulseScaleOut 1s infinite ease-in-out;
+				animation: sk-pulseScaleOut 1s infinite ease-in-out; }
+
+	  @-webkit-keyframes sk-pulseScaleOut {
+		0% {
+		  -webkit-transform: scale(0);
+				  transform: scale(0); }
+		100% {
+		  -webkit-transform: scale(1);
+				  transform: scale(1);
+		  opacity: 0; } }
+
+	  @keyframes sk-pulseScaleOut {
+		0% {
+		  -webkit-transform: scale(0);
+				  transform: scale(0); }
+		100% {
+		  -webkit-transform: scale(1);
+				  transform: scale(1);
+		  opacity: 0; } }
+	</style>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(app) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="../bower_components/bootstrap-social/bootstrap-social.css" />
+    <link rel="stylesheet" href="../bower_components/nvd3/build/nv.d3.css" />
+    <link rel="stylesheet" href="../bower_components/animate.css/animate.css" />
+    <link rel="stylesheet" href="../bower_components/googlefonts-gruppo/gruppo.css" />
+    <link rel="stylesheet" href="../bower_components/googlefonts-cinzel/cinzel.css" />
+    <link rel="stylesheet" href="../bower_components/ionicons/css/ionicons.css" />
+    <link rel="stylesheet" href="../bower_components/angular-loading-bar/build/loading-bar.css" />
+    <link rel="stylesheet" href="../bower_components/ng-response-button/ngResponseButton.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/c_main.css">
+    <!-- endbuild -->
+		
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	  ga('create', 'UA-72369833-1', 'none');
+	</script>
+  </head>
+  <body class="ng-landing-body">
+	
+	<div class="ng-landing">
+	  <div class="sk-spinner sk-spinner-pulse"></div>
+	  <div>Loading https://meanr.io</div>
+	</div>
+    
+    <div ng-app="ngApp" ng-cloak ng-landing>
+      <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <![endif]-->
+
+      <!-- Add your site or application content here -->
+      <!-- Navigation -->
+      <div ng-controller="HeaderCtrl">
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a href="#!/home">
+                <span class="navbar-brand meanr-brand">
+                  <span class="text-mysql">M</span><span class="text-express">E</span><span class="text-angular">A</span><span class="text-node">N</span><span class="text-black">r</span>
+                </span>
+              </a>
+
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse" nav-collapse>
+              <ul class="nav navbar-nav">
+                <li><a href="#!/about">About</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a ng-show="!$storage.token" href="#!/signin">Sign In</a></li>
+                <li><a ng-show="!$storage.token" href="#!/signup">Sign Up</a></li>
+                <li title="Admin Dashboard">
+                  <a ng-show="$storage.userCapabilities.isAdmin" href="#!/admin/users"><i class="fa fa-cogs fa-m"></i></a>
+                </li>
+                <li title="Profile">
+                  <a ng-show="$storage.token" href="#!/profile"><i class="fa fa-user fa-m"></i></a>
+                </li>
+                <li title="Sign out">
+                  <a ng-show="$storage.token" ng-click="signout()" class="pointer"><i class="fa fa-sign-out fa-m"></i></a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+          </div>
+          <!-- /.container -->
+      </nav>
+      </div>
+
+      <div ng-view=""></div>
+
+      <!-- build:js(.) scripts/oldieshim.js -->
+      <!--[if lt IE 9]>
+      <script src="bower_components/es5-shim/es5-shim.js"></script>
+      <script src="bower_components/json3/lib/json3.js"></script>
+      <![endif]-->
+      <!-- endbuild -->
+
+      <!-- build:js(app) scripts/vendor.js -->
+      <!-- bower:js -->
+      <script src="../bower_components/jquery/dist/jquery.js"></script>
+      <script src="../bower_components/es5-shim/es5-shim.js"></script>
+      <script src="../bower_components/angular/angular.js"></script>
+      <script src="../bower_components/json3/lib/json3.js"></script>
+      <script src="../bower_components/angular-resource/angular-resource.js"></script>
+      <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+      <script src="../bower_components/angular-animate/angular-animate.js"></script>
+      <script src="../bower_components/angular-touch/angular-touch.js"></script>
+      <script src="../bower_components/angular-route/angular-route.js"></script>
+      <script src="../bower_components/angular-cache/dist/angular-cache.js"></script>
+      <script src="../bower_components/angular-messages/angular-messages.js"></script>
+      <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+      <script src="../bower_components/angular-smart-table/dist/smart-table.js"></script>
+      <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script src="../bower_components/angular-filter/dist/angular-filter.min.js"></script>
+      <script src="../bower_components/d3/d3.js"></script>
+      <script src="../bower_components/nvd3/build/nv.d3.js"></script>
+      <script src="../bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+      <script src="../bower_components/jsnlog/jsnlog.js"></script>
+      <script src="../bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
+      <script src="../bower_components/socket.io-client/socket.io.js"></script>
+      <script src="../bower_components/angular-payments/lib/angular-payments.js"></script>
+      <script src="../bower_components/angular-update-meta/dist/update-meta.js"></script>
+      <script src="../bower_components/ng-set-focus/ngSetFocus.js"></script>
+      <script src="../bower_components/ngstorage/ngStorage.js"></script>
+      <script src="../bower_components/SHA-1/sha1.js"></script>
+      <script src="../bower_components/angulartics/src/angulartics.js"></script>
+      <script src="../bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js"></script>
+      <script src="../bower_components/angular-loading-bar/build/loading-bar.js"></script>
+      <script src="../bower_components/fastclick/lib/fastclick.js"></script>
+      <script src="../bower_components/ua-parser-js/src/ua-parser.js"></script>
+      <script src="../bower_components/ng-ua-icons/ngUaIcons.js"></script>
+      <script src="../bower_components/ng-response-button/ngResponseButton.js"></script>
+      <!-- endbower -->
+      <!-- endbuild -->
+
+      <!-- build:js({.tmp,app}) scripts/scripts.js -->
+      <script src="scripts/app.js"></script>
+      <script src="scripts/core/decorators/c_JSNLog.js"></script>
+      <script src="scripts/core/services/c_JSNLogInterceptor.js"></script>
+      <script src="scripts/core/services/c_authInterceptor.js"></script>
+      <script src="scripts/core/services/c_api.js"></script>
+      <script src="scripts/core/services/c_user.js"></script>
+      <script src="scripts/core/services/c_socketio.js"></script>
+      <script src="scripts/core/services/c_chart.js"></script>
+      <script src="scripts/core/services/c_metaUpdate.js"></script>
+      <script src="scripts/core/controllers/c_main.js"></script>
+      <script src="scripts/core/controllers/c_signin.js"></script>
+      <script src="scripts/core/controllers/c_signup.js"></script>
+      <script src="scripts/core/controllers/c_header.js"></script>
+      <script src="scripts/core/controllers/c_profile.js"></script>
+      <script src="scripts/core/controllers/c_reset.js"></script>
+      <script src="scripts/core/controllers/c_confirm.js"></script>
+      <script src="scripts/core/controllers/c_about.js"></script>
+      <script src="scripts/core/controllers/c_audit.js"></script>
+      <script src="scripts/core/controllers/c_security.js"></script>
+      <script src="scripts/core/controllers/c_users.js"></script>
+      <script src="scripts/core/controllers/c_routes.js"></script>
+      <script src="scripts/core/controllers/c_banned.js"></script>
+      <script src="scripts/core/controllers/c_JSNLog.js"></script>
+      <script src="scripts/core/directives/c_navCollapse.js"></script>
+      <script src="scripts/core/directives/c_ngSocialShare.js"></script>
+      <script src="scripts/core/directives/c_ngLanding.js"></script>
+      <script src="scripts/core/filters/c_parseJson.js"></script>
+      <!-- endbuild --> 
+    </div>
+  </body>
+</html>

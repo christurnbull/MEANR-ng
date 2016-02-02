@@ -1,0 +1,164 @@
+<update-title title="{{meta.title}}"></update-title>
+<update-meta property="og:title" content="{{meta.title}}" /></update-meta>
+<update-meta name="description" content="{{meta.description}}"></update-meta>
+<update-meta property="og:description" content="{{meta.description}}" /></update-meta>
+<update-meta property="og:url" content="{{meta.url}}" /></update-meta>
+
+<ng-include src="'views/core/c_admin.html'"></ng-include>
+<div class="container-fluid">
+  <div class="col-md-12">
+	<h3>JSNLog Audit</h3>
+    <div class="row">
+      
+      <ng-include src="'views/core/c_apiMessage.html'"></ng-include>
+          
+	  <div class="form-inline">
+
+		<div class="input-group">
+		  <table style="vertical-align:middle"><tr>
+			<td>
+			  <div class="input-group">
+				<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" 
+				ng-model="serverFilter.data.from" is-open="datepicker.from.opened" ng-required="true"
+				placeholder="From Date"/>
+				<span class="input-group-btn">
+				  <button type="button" class="btn btn-default" ng-click="datepicker.open('from')"><i class="glyphicon glyphicon-calendar"></i></button>
+				</span>
+			  </div>
+			</td>
+			<td>
+			  <uib-timepicker ng-model="serverFilter.data.from" show-meridian="datepicker.meridian"></uib-timepicker>
+			</td>
+			<td width="20px"></td>
+			<td>
+			  <div class="input-group">
+				<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" 
+				  ng-model="serverFilter.data.to" is-open="datepicker.to.opened" ng-required="true"
+				  placeholder="To Date"/>
+				<span class="input-group-btn">
+				  <button type="button" class="btn btn-default" ng-click="datepicker.open('to')"><i class="glyphicon glyphicon-calendar"></i></button>
+				</span>
+			  </div>
+			</td>
+			<td>
+			  <uib-timepicker ng-model="serverFilter.data.to" show-meridian="datepicker.meridian"></uib-timepicker>
+			</td>
+			<td width="20px"></td>
+			<td>
+              <div class="input-group">
+                <label>Limit</label>
+                <input type="number" ng-model="serverFilter.data.limit" placeholder="Limit rows" class="form-control">
+              </div>
+			</td>
+			<td width="20px"></td>
+			<td>
+              <button type="button" class="btn btn-muted"
+                  ng-click="autorefresh.toggle()"
+                  ng-class="{'btn-info' : autorefresh.enabled}">
+                Auto refresh <i class="fa fa-refresh"></i>
+              </button>
+			</td>
+		  </tr></table>
+		</div>
+
+		<p></p>
+
+		<input type="text" ng-model="serverFilter.data.userId"
+			   placeholder="Filter User ID"
+			   class="form-control">
+		<input type="text" ng-model="serverFilter.data.message"
+			   placeholder="Filter Message"
+			   uib-typeahead="message.message for message in typeahead('message',$viewValue)"
+			   typeahead-loading="serverFilter.loading"
+			   typeahead-no-results="serverFilter.nores"
+			   class="form-control">
+		<input type="text" ng-model="serverFilter.data.browser"
+			   placeholder="Filter Browser"
+			   uib-typeahead="browser.browser for browser in typeahead('browser',$viewValue)"
+			   typeahead-loading="serverFilter.loading"
+			   typeahead-no-results="serverFilter.nores"
+			   class="form-control">
+		<input type="text" ng-model="serverFilter.data.os"
+			   placeholder="Filter OS"
+			   uib-typeahead="os.os for os in typeahead('os',$viewValue)"
+			   typeahead-loading="serverFilter.loading"
+			   typeahead-no-results="serverFilter.nores"
+			   class="form-control">
+		<input type="text" ng-model="serverFilter.data.device"
+			   placeholder="Filter Device"
+			   uib-typeahead="device.device for device in typeahead('device',$viewValue)"
+			   typeahead-loading="serverFilter.loading"
+			   typeahead-no-results="serverFilter.nores"
+			   class="form-control">
+
+		<button type="button" class="btn btn-info" ng-click="serverFilter.update()"><i class="fa fa-refresh"></i></button>
+		<button type="button" class="btn btn-danger" ng-click="serverFilter.reset()"><i class="fa fa-remove"></i></button>
+		<i ng-show="serverFilter.loading" class="glyphicon glyphicon-refresh"></i>
+		<i ng-show="serverFilter.nores" class="fa fa-frown-o fa-m text-danger"></i>
+        <span>{{auditTable.length}} Results</span>
+	  </div>	  
+    </div>
+	
+	<hr> 
+    
+    <div class="row">
+      <table st-table="auditTable" st-safe-src="audit" class="table table-striped">
+        <thead>
+          <tr>
+            <th st-sort="createdAt">Time</th>
+            <th st-sort="name">Name</th>
+            <th st-sort="message">Message</th>
+            <th st-sort="logData">Data</th>
+            <th st-sort="stack">Stack</th>
+            <th st-sort="route">Route</th>
+            <th st-sort="browser">Browser</th>
+            <th st-sort="os">OS</th>
+            <th st-sort="device">Device</th>
+            <th st-sort="userId">User ID</th>
+          </tr>
+          <tr>
+            <th><input st-search="createdAt" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="name" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="message" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="logData" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="stack" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="route" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="browser" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="os" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="device" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="userId" class="input-sm form-control" type="search"/></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="row in auditTable">
+            <td>{{row.createdAt | date:'short'}}</td>
+            <td>{{row.name}}</td>
+            <td>{{row.message}}</td>
+            <td>{{row.logData}}</td>
+            <td>
+              <i class="fa pointer"
+				ng-show="row.stack"
+				ng-click="row.showStack=!row.showStack"
+				ng-class="row.showStack ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+			  <pre ng-show="row.showStack" class="">{{row.stack}}</pre>
+            </td>
+            <td><pre>{{row.route | parseJson | json}}</pre></td>
+            <td>{{row.browser}} {{row.browserMajor}}.{{row.browserMinor}}.{{row.browserPatch}}</td>
+            <td>{{row.os}} {{row.osMajor}}.{{row.osMinor}}.{{row.osPatch}}</td>
+            <td>{{row.device}}</td>
+            <td>{{row.userId}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="17" class="text-center">
+              <div st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+  </div>
+</div>
+

@@ -1,0 +1,50 @@
+<update-title title="{{meta.title}}"></update-title>
+<update-meta property="og:title" content="{{meta.title}}" /></update-meta>
+<update-meta name="description" content="{{meta.description}}"></update-meta>
+<update-meta property="og:description" content="{{meta.description}}" /></update-meta>
+<update-meta property="og:url" content="{{meta.url}}" /></update-meta>
+
+<ng-include src="'views/core/c_admin.html'"></ng-include>
+<div class="container-fluid">
+  <div class="col-md-12">
+	<h3>Banned IPs</h3>
+    <div class="row">
+      <ng-include src="'views/core/c_apiMessage.html'"></ng-include>
+      
+      <table st-table="ipsTable" st-safe-src="ips" class="table table-striped">
+        <thead>
+          <tr>
+            <th st-sort="ip">IP</th>
+            <th st-sort="type">Reason</th>
+            <th st-sort="geo.country">Country</th>
+            <th st-sort="geo.city">City</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th></th>
+          </tr>
+          <tr>
+            <th><input st-search="ip" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="type" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="geo.country" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="geo.city" class="input-sm form-control" type="search"/></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="ip in ipsTable">
+            <td>{{ip.ip}}</td>
+            <td>{{ip.type}}</td>
+            <td>{{ip.geo.country}}</td>
+            <td>{{ip.geo.city}}</td>
+            <td>{{ip.geo.ll[0]}}</td>
+            <td>{{ip.geo.ll[1]}}</td>
+            <td><i class="fa fa-times pointer text-danger" ng-click="remove(ip,$index)"></i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

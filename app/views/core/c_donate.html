@@ -1,0 +1,122 @@
+<div class="panel panel-default stripejs">
+  <div class="panel-heading">
+    <span>Make Payment</span>
+    <img src="/images/poweredByStripe.png">
+  </div>
+  <div class="panel-body">
+    <form name="form" novalidate>
+      <div ng-if="!payment.result" class="">
+        <div class="input-group float-center"  title="Amount">
+          <label class="input-group-addon" for="amount">
+            <span class="fa-m" ng-class="form.amount.$valid ?  'text-success-bright' : 'text-danger'">
+              <strong>{{$storage.userCapabilities.currency.symbol || '$'}}</strong>
+            </span>
+          </label>
+          <input ng-model="stripeData.amount" class="form-control md" id="amount"
+            placeholder="Amount" name="amount" type="number" required
+            uib-tooltip="Amount is required"
+            ng-focus="form.amount.$focus=true" ng-blur="form.amount.$focus=false" ng-set-focus="amount" set-focus-default
+            tooltip-is-open="!form.amount.$valid && form.amount.$focus && form.amount.$dirty"
+            tooltip-placement="right" tooltip-class="has-warning-{{form.trySubmit}}" tooltip-trigger="none">
+        </div>
+
+        <div class="input-group float-center " title="Email Address for Receipt">
+          <label class="input-group-addon" for="email">
+            <i class="ion-email fa-m"></i>
+          </label>
+          <input ng-model="stripeData.email" class="form-control xlg"  id="email"
+            placeholder="Receipt Email Address" name="email" type="email"
+            uib-tooltip="Enter a valid email address"
+            ng-focus="form.email.$focus=true" ng-blur="form.email.$focus=false" ng-set-focus="email" 
+            tooltip-is-open="!form.email.$valid && form.email.$focus && form.email.$dirty"
+            tooltip-placement="right" tooltip-class="has-warning-{{form.trySubmit}}" tooltip-trigger="none">
+        </div>
+
+        <div class="input-group" title="Card Number">
+          <label class="input-group-addon" for="number"><i 
+            class="ion-card fa-m"
+            ng-class="form.number.$valid ?  'text-success-bright' : 'text-danger'">
+            </i>
+          </label>
+          <input ng-model="stripeData.number" class="form-control xlg" id="number"
+            placeholder="Card Number" name="number" type="text" required
+            payments-validate="card" payments-format="card" payments-type-model="type"
+            ng-class="form.number.$card.type"
+            uib-tooltip="Must be a valid card number"
+            ng-focus="form.number.$focus=true" ng-blur="form.number.$focus=false" ng-set-focus="number"
+            tooltip-is-open="!form.number.$valid && form.number.$focus && form.number.$dirty"
+            tooltip-placement="right" tooltip-class="has-warning-{{form.trySubmit}}" tooltip-trigger="none">
+        </div>
+
+        <div class="input-group" title="Name on Card">
+          <label class="input-group-addon" for="name"><i
+            class="ion-person fa-m" 
+            ng-class="form.name.$valid ?  'text-success-bright' : 'text-danger'">
+            </i>
+          </label>
+          <input ng-model="stripeData.name" class="form-control xlg" id="name"
+            placeholder="Name on Card" name="name" type="text" required
+            ng-class="form.name.$card.type"
+            uib-tooltip="Name on card is required"
+            ng-focus="form.name.$focus=true" ng-blur="form.name.$focus=false" ng-set-focus="name"
+            tooltip-is-open="!form.name.$valid && form.name.$focus && form.name.$dirty"
+            tooltip-placement="right" tooltip-class="has-warning-{{form.trySubmit}}" tooltip-trigger="none">
+        </div>	
+
+        <div class="input-group">
+          <label class="input-group-addon" for="expiry" title="Card Expiry"><span
+            class=""
+            ng-class="form.expiry.$valid ?  'text-success-bright' : 'text-danger'">
+            exp</span>
+          </label>
+          <input ng-model="stripeData.expiry" class="form-control md" id="expiry"
+            placeholder="MM / YY" name="expiry" type="text" required
+            payments-validate="expiry" payments-format="expiry"
+            ng-class="form.expiry.$card.type"
+            uib-tooltip="Expiry Date eg. 01/19"
+            ng-focus="form.expiry.$focus=true" ng-blur="form.expiry.$focus=false" ng-set-focus="expiry"
+            tooltip-is-open="!form.expiry.$valid && form.expiry.$focus && form.expiry.$dirty"
+            tooltip-placement="right" tooltip-class="has-warning-{{form.trySubmit}}" tooltip-trigger="none">
+
+          <span class="input-group-addon spacer"></span>
+
+          <label class="input-group-addon" for="cvc" title="Card CVC"><span
+            class=""
+            ng-class="form.cvc.$valid ?  'text-success-bright' : 'text-danger'">
+            cvc</span>
+          </label>
+          <input ng-model="stripeData.cvc" class="form-control sm" id="cvc"
+            placeholder="eg. 123" name="cvc" type="text" required
+            payments-validate="cvc" payments-format="cvc" payments-type-model="type"
+            ng-class="form.cvc.$card.type"
+            uib-tooltip="Card Verificatino Code eg. 123"
+            ng-focus="form.cvc.$focus=true" ng-blur="form.cvc.$focus=false" ng-set-focus="cvc"
+            tooltip-is-open="!form.cvc.$valid && form.cvc.$focus && form.cvc.$dirty"
+            tooltip-placement="right" tooltip-class="has-warning-{{form.trySubmit}}" tooltip-trigger="none">
+        </div>
+
+        <div class="col-sm-12">          
+          <button type="button" class="btn btn-block btn-default ng-response-button"
+              ng-response-button="donate(form,$event)" submit="form" revert="2000"
+              ng-class="{'btn-success' : form.$valid }">
+            Donate {{stripeData.amount | currency: $storage.userCapabilities.currency.symbol || '$'}}
+          </button>
+        </div>
+      </div>
+
+      <div ng-if="payment.result" class="float-center">
+        <div ng-if="payment.result=='success'" class="alert alert-success stripe" role="alert">
+          <h3>Payment successful!</h3>			  
+          <p>{{payment.amount | currency: $storage.userCapabilities.currency.symbol || '$'}}</p>
+          <p>Many thanks for your kind generosity</p>
+        </div>
+        <div ng-if="payment.result=='error'" class="alert alert-danger stripe" role="alert">
+          <h3>Error during payment <i class="fa fa-frown-o"></i></h3>
+          <p>Payment has <strong>not</strong> been made</p>
+          <p>{{payment.msg}}</p>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

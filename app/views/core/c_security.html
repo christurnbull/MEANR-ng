@@ -1,0 +1,229 @@
+<update-title title="{{meta.title}}"></update-title>
+<update-meta property="og:title" content="{{meta.title}}" /></update-meta>
+<update-meta name="description" content="{{meta.description}}"></update-meta>
+<update-meta property="og:description" content="{{meta.description}}" /></update-meta>
+<update-meta property="og:url" content="{{meta.url}}" /></update-meta>
+
+<ng-include src="'views/core/c_admin.html'"></ng-include>
+<div class="container-fluid">
+  <div class="col-md-12">
+	<h3>Security Audit Log</h3>
+    <div class="row">
+      <ng-include src="'views/core/c_apiMessage.html'"></ng-include>
+	  
+	  <div class="form-inline">
+
+		<div class="input-group">
+		  <table style="vertical-align:middle"><tr>
+			<td>
+			  <div class="input-group">
+				<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" 
+				ng-model="serverFilter.data.from" is-open="datepicker.from.opened" ng-required="true"
+				placeholder="From Date"/>
+				<span class="input-group-btn">
+				  <button type="button" class="btn btn-default" ng-click="datepicker.open('from')"><i class="glyphicon glyphicon-calendar"></i></button>
+				</span>
+			  </div>
+			</td>
+			<td>
+			  <uib-timepicker ng-model="serverFilter.data.from" show-meridian="datepicker.meridian"></uib-timepicker>
+			</td>
+			<td width="20px"></td>
+			<td>
+			  <div class="input-group">
+				<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" 
+				  ng-model="serverFilter.data.to" is-open="datepicker.to.opened" ng-required="true"
+				  placeholder="To Date"/>
+				<span class="input-group-btn">
+				  <button type="button" class="btn btn-default" ng-click="datepicker.open('to')"><i class="glyphicon glyphicon-calendar"></i></button>
+				</span>
+			  </div>
+			</td>
+			<td>
+			  <uib-timepicker ng-model="serverFilter.data.to" show-meridian="datepicker.meridian"></uib-timepicker>
+			</td>
+            <td width="20px"></td>
+			<td>
+              <div class="input-group">
+                <label>Limit</label>
+                <input type="number" ng-model="serverFilter.data.limit" placeholder="Limit rows" class="form-control">
+              </div>
+			</td>
+			<td width="20px"></td>
+			<td>
+              <button type="button" class="btn btn-muted"
+                  ng-click="autorefresh.toggle()"
+                  ng-class="{'btn-info' : autorefresh.enabled}">
+                Auto refresh <i class="fa fa-refresh"></i>
+              </button>
+			</td>
+		  </tr></table>
+		</div>
+
+		<p></p>
+
+		<input type="text" ng-model="serverFilter.data.userId"
+			   placeholder="Filter User ID"
+			   class="form-control">
+		<input type="text" ng-model="serverFilter.data.name"
+			   placeholder="Filter Error Name"
+			   uib-typeahead="name.name for name in typeahead('name',$viewValue)"
+			   typeahead-loading="serverFilter.loading"
+			   typeahead-no-results="serverFilter.nores"
+			   class="form-control">
+		<input type="text" ng-model="serverFilter.data.msg"
+			   placeholder="Filter Message"
+			   uib-typeahead="msg.msg for msg in typeahead('msg',$viewValue)"
+			   typeahead-loading="serverFilter.loading"
+			   typeahead-no-results="serverFilter.nores"
+			   class="form-control">
+		<input type="text" ng-model="serverFilter.data.description"
+			   placeholder="Filter Description"
+			   uib-typeahead="description.description for description in typeahead('description',$viewValue)"
+			   typeahead-loading="serverFilter.loading"
+			   typeahead-no-results="serverFilter.nores"
+			   class="form-control">
+		<input type="text" ng-model="serverFilter.data.code"
+			   placeholder="Filter Code"
+			   uib-typeahead="code.code for code in typeahead('code',$viewValue)"
+			   typeahead-loading="serverFilter.loading"
+			   typeahead-no-results="serverFilter.nores"
+			   class="form-control">
+		<input type="text" ng-model="serverFilter.data.ip"
+			   placeholder="Filter IP"
+			   uib-typeahead="ip.ip for ip in typeahead('ip',$viewValue)"
+			   typeahead-loading="serverFilter.loading"
+			   typeahead-no-results="serverFilter.nores"
+			   class="form-control">	    
+		<input type="text" ng-model="serverFilter.data.country"
+			   placeholder="Filter Country"
+			   uib-typeahead="country.country for country in typeahead('country',$viewValue)"
+			   typeahead-loading="serverFilter.loading"
+			   typeahead-no-results="serverFilter.nores"
+			   class="form-control">
+		<input type="text" ng-model="serverFilter.data.method"
+			   placeholder="Filter Method"
+			   uib-typeahead="method.method for method in typeahead('method',$viewValue)"
+			   typeahead-loading="serverFilter.loading"
+			   typeahead-no-results="serverFilter.nores"
+			   class="form-control">	
+		<input type="text" ng-model="serverFilter.data.route"
+			   placeholder="Filter Route"
+			   uib-typeahead="route.route for route in typeahead('route',$viewValue)"
+			   typeahead-loading="serverFilter.loading"
+			   typeahead-no-results="serverFilter.nores"
+			   class="form-control">
+
+		<button type="button" class="btn btn-info" ng-click="serverFilter.update()"><i class="fa fa-refresh"></i></button>
+		<button type="button" class="btn btn-danger" ng-click="serverFilter.reset()"><i class="fa fa-remove"></i></button>
+		<i ng-show="serverFilter.loading" class="glyphicon glyphicon-refresh"></i>
+		<i ng-show="serverFilter.nores" class="fa fa-frown-o fa-m text-danger"></i>
+        <span>{{auditTable.length}} Results</span>
+	  </div>	  
+    </div>
+	
+	<hr>
+    <ng-include src="'views/core/c_chart.html'"></ng-include>
+	
+    <div class="row">
+      <table st-table="auditTable" st-safe-src="audit" class="table table-striped">
+        <thead>
+          <tr>
+            <th st-sort="createdAt">Time</th>
+            <th st-sort="userId">user ID</th>
+            <th st-sort="name">Name</th>
+            <th st-sort="msg">Message</th>
+            <th st-sort="description">Description</th>
+            <th st-sort="code">Code</th>
+            <th st-sort="ip">IP</th>
+            <th st-sort="headers">Headers</th>
+            <th st-sort="method">Method</th>
+            <th st-sort="route">Route</th>
+            <th st-sort="url">URL</th>
+            <th st-sort="body">Body</th>
+            <th st-sort="params">Params</th>
+            <th st-sort="query">Query</th>
+            <th st-sort="lag">Lag (ms)</th>
+            <th st-sort="cpu">CPU % (minute average)</th>
+            <th st-sort="memory">RAM</th>
+            <th st-sort="duration">Response Time (ms)</th>
+          </tr>
+		  <tr>
+            <th><input st-search="createdAt" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="userId" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="name" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="msg" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="description" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="code" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="ip" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="headers" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="method" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="route" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="url" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="body" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="params" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="query" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="lag" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="cpu" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="memory" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="duration" class="input-sm form-control" type="search"/></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="row in auditTable">
+            <td>{{row.createdAt | date:'short'}}</td>
+            <td>{{row.userId}}</td>
+            <td>{{row.name}}</td>
+            <td>{{row.msg}}</td>
+            <td>{{row.description}}</td>
+            <td>{{row.code}}</td>
+            <td>{{row.ip}}</td>
+            <td>
+			  <i class="fa pointer"
+				ng-click="row.showHeaders=!row.showHeaders"
+				ng-class="row.showHeaders ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+			  <pre ng-show="row.showHeaders" class="zoomIn">{{row.headers | parseJson | json }}</pre>
+			</td>
+            <td>{{row.method}}</td>
+            <td>{{row.route}}</td>
+            <td>{{row.url}}</td>
+            <td>
+			  <i class="fa pointer"
+				ng-show="row.body"
+				ng-click="row.showBody=!row.showBody"
+				ng-class="row.showBody ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+			  <pre ng-show="row.showBody" class="zoomIn">{{row.body | parseJson | json }}</pre>
+			</td>
+            <td>
+			  <i class="fa pointer"
+				ng-show="row.params"
+				ng-click="row.showParams=!row.showParams"
+				ng-class="row.showParams ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+			  <pre ng-show="row.showParams" class="zoomIn">{{row.params | parseJson | json  }}</pre>
+			</td>
+            <td>
+			  <i class="fa pointer"
+				ng-show="row.query"
+				ng-click="row.showQuery=!row.showQuery"
+				ng-class="row.showQuery ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+			  <pre ng-show="row.showQuery" class="zoomIn">{{row.query | parseJson | json  }}</pre>
+			</td>
+            <td>{{row.lag | number:2 }}</td>
+            <td>{{row.cpu | number:2 }}</td>
+            <td>{{row.memory | byteFmt: 2 }}</td>
+            <td>{{row.duration }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="18" class="text-center">
+              <div st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+  </div>
+</div>
+

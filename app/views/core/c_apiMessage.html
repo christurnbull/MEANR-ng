@@ -1,0 +1,22 @@
+<uib-alert type="{{api.message.data.type}}" 
+    close="api.message.show=false"
+    dismiss-on-timeout="{{api.message.data.timeout}}"
+    ng-if="api.message.show"
+    class="{{api.message.data.class}}">
+  <strong>{{api.message.data.msg}}</strong> {{api.message.data.desc}}
+</uib-alert>
+
+<!--
+<div ng-messages="api.message" class="ngMessages">
+  <div ng-message="msg" class="ngMessage">
+    <uib-alert type="info" close="api.message=null" dismiss-on-timeout="3000">
+      <strong>{{api.message.msg}}</strong> {{api.message.desc}}
+    </uib-alert>
+  </div>
+  <div ng-message="err" class="ngMessageErr">
+    <uib-alert type="danger" close="api.message=null" dismiss-on-timeout="3000">
+      <strong>{{api.message.err.msg}}</strong> {{api.message.err.desc}}
+    </uib-alert>
+  </div>
+</div>
+-->

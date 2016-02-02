@@ -1,0 +1,123 @@
+<update-title title="{{meta.title}}"></update-title>
+<update-meta property="og:title" content="{{meta.title}}" /></update-meta>
+<update-meta name="description" content="{{meta.description}}"></update-meta>
+<update-meta property="og:description" content="{{meta.description}}" /></update-meta>
+<update-meta property="og:url" content="{{meta.url}}" /></update-meta>
+
+<ng-include src="'views/core/c_admin.html'"></ng-include>
+<div class="container-fluid">	
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Routes</h3>
+      <ng-include src="'views/core/c_apiMessage.html'"></ng-include>
+
+      <h4>Minigun Testing</h4>
+      <div>
+        <div ng-show="test.state=='running'"><i class="fa fa-spinner fa-m fa-spin"></i> Running Minigun Test</div>
+        <div ng-show="test.state=='finished'"><i class="fa fa-thumbs-o-up fa-m"></i> Finished Minigun Test</div>
+      </div>
+      <div class="form-inline">
+        <label>Duration</label><input type="number" ng-model="test.req.duration"
+          placeholder="Seconds to run load test"
+          class="form-control">
+        <label>RPS</label><input type="number" ng-model="test.req.rps"
+          placeholder="Requests per second"
+          class="form-control">
+        <label>Data Samples</label><input type="number" ng-model="test.req.samples"
+          placeholder="Number of data samples"
+          class="form-control">
+        <label>Token</label><input type="text" ng-model="test.req.token"
+          placeholder="Token to use"
+          class="form-control">
+      </div>
+      <div ng-if="test.chart">
+        <ng-include src="'views/core/c_chart.html'"></ng-include>
+      </div>
+      <div ng-show="test.task"><i class="fa pointer"
+        ng-click="test.showTask=!test.showTask"
+        ng-class="test.showTask ? 'fa-chevron-up' : 'fa-chevron-down'">Task</i>
+      <pre ng-show="test.showTask" class="fadeIn">{{test.task | json }}</pre></div>
+      <div ng-show="test.report"><i class="fa pointer"
+        ng-click="test.showReport=!test.showReport"
+        ng-class="test.showReport ? 'fa-chevron-up' : 'fa-chevron-down'">Report</i>
+      <pre ng-show="test.showReport" class="fadeIn">{{test.report | json }}</pre></div>              
+      <hr>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <h4>Middleware Stack</h4>
+      <div class="jumbotron">
+        <h4 ng-repeat="middleware in routes.middleware">
+          <span class="label label-info">{{middleware.name}}</span>
+          <div><i class="fa fa-level-down"></i></div>
+        </h4>
+      </div>
+    </div>
+
+    <div class="col-md-10">
+      <table st-table="routesTable" st-safe-src="routes.routes" class="table table-striped">
+        <thead>
+          <tr>
+            <th st-sort="route.path">Route</th>
+            <th st-sort="method(route.route.methods)">Method</th>
+            <th st-sort="route.stack.name">Middleware</th>
+            <th st-sort="jsonSchema">JSON Schema</th>
+            <th st-sort="aclRoles">ACL Roles</th>
+            <th st-sort="routeInfo">Info</th>
+          </tr>
+          <tr>
+            <th><input st-search="route.path" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="route.method" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="route.stack.name" class="input-sm form-control" type="search"/></th>
+            <th></th>
+            <th><input st-search="aclRoles" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="routeInfo" class="input-sm form-control" type="search"/></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="route in routesTable">
+            <td>
+              <strong><input type="text" ng-model="route.route.route" class="well"></strong>
+              <button type="button" class="btn btn-danger" ng-click="test.run(route, $index)">Test Route</button>
+            </td>
+            <td>
+              <div class="label " 
+                ng-class="route.route.method == 'GET' ? 'label-success' : 
+                          route.route.method == 'POST' ? 'label-primary' : 
+                          route.route.method == 'PUT' ? 'label-warning' : 
+                          route.route.method == 'DELETE' ? 'label-danger' : 'label-default' ">
+                {{route.route.method}}
+              </div>
+            </td>
+            <td>
+              <div ng-repeat="middleware in route.route.stack">
+                <div class="label label-info">
+                  {{middleware.name}} <i class="fa fa-level-down"></i>
+                </div>
+              </div>
+            </td>
+            <td>
+              <i class="fa pointer"
+				ng-click="route.showjsonSchema=!route.showjsonSchema"
+				ng-class="route.showjsonSchema ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+              <pre ng-show="route.showjsonSchema" class="zoomIn">{{route.jsonSchema | json}}</pre>
+            </td>
+            <td>
+              <div class="label" ng-repeat="role in route.aclRoles"
+                   ng-class=" role == 'public' ? 'label-danger' :
+                              role == 'everyone' ? 'label-warning' : 'label-default' ">
+                {{role}}
+              </div>
+            </td>
+            <td>
+              <div class="well well-sm">{{route.routeInfo}}</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

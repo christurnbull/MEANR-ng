@@ -1,0 +1,102 @@
+<update-title title="{{meta.title}}"></update-title>
+<update-meta property="og:title" content="{{meta.title}}" /></update-meta>
+<update-meta name="description" content="{{meta.description}}"></update-meta>
+<update-meta property="og:description" content="{{meta.description}}" /></update-meta>
+<update-meta property="og:url" content="{{meta.url}}" /></update-meta>
+
+<div class="container-fluid">
+  <div class="row">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-4">
+	  <h4>Sign In</h4>
+	  
+      <ng-include src="'views/core/c_apiMessage.html'"></ng-include>	  
+	  
+      <div ng-hide="provider">
+        <form name="form">
+          <div ng-messages="form.email.$error" ng-if="form.$submitted">
+            <div ng-message="required" class="alert alert-danger ngMessageAttn">Enter your email address to reset your password</div>
+          </div>
+
+          <div class="alert alert-info">
+            <div><h4>Default credentials:</h4></div>
+            <div>
+              <p>Admin: <strong>admin@meanr.io</strong></p>
+              <p>Member: <strong>joe@meanr.io</strong></p>
+              <p>User: <strong>abi@meanr.io</strong></p>
+              <p>All passwords: <strong>123</strong></p>
+            </div>
+          </div>
+          
+          <div class="input-group" title="Email Address">
+            <label class="input-group-addon" for="email"><i
+                class="glyphicon glyphicon-envelope"
+                ng-class="form.email.$valid ?  'text-success-bright' : 'text-danger'">
+              </i>
+            </label>
+            <input ng-model="formData.email" class="form-control" id="email"
+              placeholder="Email Address" name="email" type="email" required
+			  uib-tooltip="{{form.email.tooltip}}"
+			  ng-focus="form.email.$focus=true" ng-blur="form.email.$focus=false" ng-set-focus="email" set-focus-default
+			  tooltip-is-open="!form.email.$valid && form.email.$focus && form.email.$dirty"
+              tooltip-placement="right" tooltip-class="has-warning-{{form.trySubmit}}" tooltip-trigger="none"/>
+          </div>
+
+          <div class="input-group passreset" title="Password">
+            <label class="input-group-addon" for="password"><i class="glyphicon glyphicon-lock"></i></label>
+            <input ng-model="formData.password" class="form-control" id="password"
+			  placeholder="Password" name="password" type="password" required
+			  uib-tooltip="{{form.password.tooltip}}"
+			  ng-focus="form.password.$focus=true" ng-blur="form.password.$focus=false" ng-set-focus="password"
+			  tooltip-is-open="!form.password.$valid && form.password.$focus && form.password.$dirty"
+			  tooltip-placement="right" tooltip-class="has-warning-{{form.trySubmit}}" tooltip-trigger="none"
+			  ng-keyup="$event.keyCode == 13 && signin(form)"/>
+            <span class="input-group-addon pointer" ng-click="reset(form)" title="Forgot password?">
+              <i class="fa fa-question fa-m text-info"></i>
+            </span>
+          </div>
+		  		  
+          <div class="col-sm-12">
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-mobile fa-m pointer text-muted"
+                    ng-click="formData.persist=!formData.persist"
+                    ng-class="{'text-danger' : formData.persist}"></i>
+                </span>
+                <button type="button" class="btn btn-block btn-default ng-response-button"
+                    ng-response-button="signin(form)" submit="form" revert="2000"
+                    ng-class="{'btn-success' : form.$valid }">
+                  Sign In
+                </button>
+              </div>
+            </div>
+            <div style="margin-top:10px" class="input-group">
+              <div class="form-inline">
+                <label>Sign In with:</label>
+                <a title="Facebook" class="btn btn-social-icon btn-facebook" ng-click="signinProviderReq('facebook')"><i class="ion-social-facebook"></i></a>
+                <a title="Twitter" class="btn btn-social-icon btn-twitter" ng-click="signinProviderReq('twitter')"><i class="ion-social-twitter"></i></a>
+                <a title="Google" class="btn btn-social-icon btn-google" ng-click="signinProviderReq('google')"><i class="ion-social-google"></i></a>
+                <a title="LinkedIn" class="btn btn-social-icon btn-linkedin" ng-click="signinProviderReq('linkedin')"><i class="ion-social-linkedin"></i></a>
+                <a title="Github" class="btn btn-social-icon btn-github" ng-click="signinProviderReq('github')"><i class="ion-social-github"></i></a>
+                <label><a href="#!/signup">or Sign Up</a></label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div ng-show="provider">
+        <div class="jumbotron">
+          <p class="lead">
+            <i class="fa fa-spinner fa-m fa-spin"></i>
+          </p>
+          Signing In
+        </div>
+      </div>
+      
+	</div>
+	<div class="col-sm-4"></div>
+  </div>
+</div>
+

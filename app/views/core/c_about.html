@@ -1,0 +1,136 @@
+<update-title title="{{meta.title}}"></update-title>
+<update-meta property="og:title" content="{{meta.title}}" /></update-meta>
+<update-meta name="description" content="{{meta.description}}"></update-meta>
+<update-meta property="og:description" content="{{meta.description}}" /></update-meta>
+<update-meta property="og:url" content="{{meta.url}}" /></update-meta>
+
+<div class="container-fluid">
+  <ng-include src="'views/core/c_apiMessage.html'"></ng-include>
+  
+  <div class="row even">
+	<div><h1>About</h1></div>
+	<div ng-if="show" class="right">
+	  <div class="col-md-2">
+		<i class="fa fa-rocket fa-xxl right about-icon-pad"></i>
+	  </div>
+	  <div class="col-md-10">
+		<div>
+		  <h2>Features</h2>
+		  <ul class="list-group about">
+			<li class="list-group-item">Mysql, Express, Angular, Node and Redis(<a href="https://www.npmjs.com/package/redis-js">js</a>)</li>
+			<li class="list-group-item"><a href="https://www.npmjs.com/package/socket.io-events">Socket.io</a></li>
+			<li class="list-group-item"><a href="https://www.npmjs.com/package/jsonwebtoken">JSON web tokens</a></li>
+			<li class="list-group-item"><a href="https://www.npmjs.com/package/sequelize">Sequelize</a> ORM - because <a href="http://www.sarahmei.com/blog/2013/11/11/why-you-should-never-use-mongodb/">relations and transactions matter</a></li>
+			<li class="list-group-item"><a href="https://mailgun.com">Mailgun</a> with <a href="https://www.npmjs.com/package/nodemailer">Node Mailer</a></li>
+			<li class="list-group-item"><a href="https://stripe.com">Stripe</a></li>
+			<li class="list-group-item"><a href="http://ogp.me/">Open Graph Protocol</a> with <a href="https://www.npmjs.com/package/angular-update-meta">automatic meta tag updates</a> on each view</li>
+			<li class="list-group-item">SEO in mind. <a href="https://googlewebmastercentral.blogspot.co.uk/2015/10/deprecating-our-ajax-crawling-scheme.html">Google renders hashbangs</a></li>
+			<li class="list-group-item">Mobile support. Uses <a href="https://ftlabs.github.io/fastclick/">FastClick</a> and a <a href="http://chieffancypants.github.io/angular-loading-bar/">loading bar</a></li>
+			<li class="list-group-item"><a href="http://angulartics.github.io/">Angulartics</a> - web analytics in your views</li>
+			<li class="list-group-item"><a href="https://www.npmjs.com/package/node-schedule">Scheduler</a> - cron style</li>
+			<li class="list-group-item"><a href="https://www.npmjs.com/package/minigun">Minigun</a> testing</li>
+			<li class="list-group-item">Animations using <a href="https://daneden.github.io/animate.css/">animate.css</a></li>
+			<li class="list-group-item">Bootstrap & <a href="https://angular-ui.github.io/bootstrap/">bootstrap-ui</a></li>
+			<li class="list-group-item">Forms - validation popovers, informative buttons</li>
+			<li class="list-group-item">Fonts! - <a href="https://google-fonts.azurewebsites.net/">Google</a>, <a href="http://ionicons.com/">IonIcons</a>, <a href="https://fortawesome.github.io">Font Awesome</a>, Bootstrap glyphs</li>
+			<li class="list-group-item">Uses <a href="http://gruntjs.com/">Grunt</a> - based on angular <a href="http://yeoman.io/">Yeoman generator</a></li>
+		  </ul>
+		</div>
+	  </div>
+	</div>
+  </div>
+  
+  <div class="row" ng-class="{'odd':show}">
+	<div ng-if="show" class="">
+	  <div class="col-md-2">
+		<i class="fa fa-lock fa-xxl right about-icon-pad"></i>
+	  </div>
+	  <div class="col-md-10">
+		<div>
+		  <h2>Authentication</h2>
+		  <ul class="list-group about">
+			<li class="list-group-item">Quick and easy user sign up</li>
+			<li class="list-group-item">Confirm accounts via email</li>
+			<li class="list-group-item">Reset password via email or via Admin dashboard</li>
+			<li class="list-group-item"><a href="http://passportjs.org/">Social logins</a></li>
+			<li class="list-group-item">JWT refresh tokens</li>
+			<li class="list-group-item">JWT 'session' tokens - will not refresh after x hours</li>
+			<li class="list-group-item">Persistent JWT tokens for use with mobile apps - sign in once only</li>
+			<li class="list-group-item">JWT tokens are revoked on the server on sign out</li>
+			<li class="list-group-item"><a href="https://www.npmjs.com/package/acl">ACL</a> - assign roles with different levels - admin, members, everyone, anonymous</li>
+			<li class="list-group-item">Reset password to revoke ALL tokens</li>
+			<li class="list-group-item">Use JWT with Socket.io</li>
+		  </ul>
+		</div>
+	  </div>
+	</div>
+  </div>
+  
+  <div class="row even">
+	<div ng-if="show" class="right">
+	  <div class="col-md-2">
+		<i class="fa fa-shield fa-xxl right about-icon-pad"></i>
+	  </div>
+	  <div class="col-md-10">
+		<div>
+		  <h2>Security</h2>
+		  <ul class="list-group about">
+			<li class="list-group-item">JSON Web Token - <a href="http://sitr.us/2011/08/26/cookies-are-bad-for-you.html">no cookies</a></li>
+			<li class="list-group-item">Strict <a href="https://www.npmjs.com/package/express-jsonschema">JSON schema</a> validation</li>
+			<li class="list-group-item">Intrusion Detection System - detect & prevent malicious activity</li>
+			<li class="list-group-item"><a href="https://www.npmjs.com/package/express-brute">Rate limit</a> endpoints</li>
+			<li class="list-group-item"><a href="https://www.npmjs.com/package/toobusy">Too busy</a> - keep serving when your app gets massively popular</li>
+		  </ul>
+		</div>
+	  </div>
+	</div>
+  </div>
+  
+  <div class="row" ng-class="{'odd':show}">
+	<div ng-if="show" class="">
+	  <div class="col-md-3">
+		  <i class="fa fa-area-chart fa-xxl right about-icon-pad"></i>
+	  </div>
+	  <div class="col-md-9">
+		<div>
+		  <h2>Audit Logs</h2>
+		  <ul class="list-group about">
+			<li class="list-group-item">Searchable logs with <a href="http://krispo.github.io/angular-nvd3">nvD3 charts</a></li>
+			<li class="list-group-item">Log particular routes/actions - 200 codes</li>
+			<li class="list-group-item">Log security - 400 codes</li>
+			<li class="list-group-item">Log server errors - 500 codes</li>
+			<li class="list-group-item">Log client errors - <a href="http://jsnlog.com/">JSNlog</a></li>
+			<li class="list-group-item">Geographic, CPU, lag, memory data</li>
+			<li class="list-group-item">Common Log Format support</li>
+		  </ul>
+		</div>
+	  </div>
+	</div>
+  </div>
+  
+  <div class="row even">
+	<div ng-if="show" class="right">
+	  <div class="col-md-2">
+		<i class="fa fa-puzzle-piece fa-xxl right about-icon-pad"></i>
+	  </div>
+	  <div class="col-md-10">
+		<div>
+		  <h2>Structure</h2>
+		  <ul class="list-group about">
+			<li class="list-group-item">Detailed route viewer</li>
+			<li class="list-group-item">Route tester - Minigun with <a href="https://www.npmjs.com/package/json-schema-faker">jsonschema faker</a></li>
+			<li class="list-group-item">Global config and library</li>
+			<li class="list-group-item">Global error handler</li>
+			<li class="list-group-item">Consistent code</li>
+		  </ul>
+		</div>
+	  </div>
+	</div>
+  </div>
+  
+  <div class="row" ng-class="{'odd':show}">
+	<div ng-if="show" class=""></div>
+  </div>
+
+</div>	  
+

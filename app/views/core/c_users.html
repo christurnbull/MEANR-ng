@@ -1,0 +1,103 @@
+<update-title title="{{meta.title}}"></update-title>
+<update-meta property="og:title" content="{{meta.title}}" /></update-meta>
+<update-meta name="description" content="{{meta.description}}"></update-meta>
+<update-meta property="og:description" content="{{meta.description}}" /></update-meta>
+<update-meta property="og:url" content="{{meta.url}}" /></update-meta>
+
+<ng-include src="'views/core/c_admin.html'"></ng-include>
+<div class="container-fluid">
+  <div class="col-md-12">
+	<h3>Users</h3>
+    <div class="row">
+      <ng-include src="'views/core/c_apiMessage.html'"></ng-include>
+
+      <table st-table="usersTable" st-safe-src="users" class="table table-striped">
+        <thead>
+          <tr>
+            <th st-sort="id">ID</th>
+            <th st-sort="name">Name</th>
+            <th st-sort="email">Email</th>
+            <th st-sort="acl_user.value">Roles</th>
+            <th st-sort="provider">Provider</th>
+            <th st-sort="createdAt">Joined</th>
+            <th st-sort="confirmed">Confirmed</th>
+            <th st-sort="revokeBefore">Revoke Before</th>
+            <th></th>
+          </tr>
+          <tr>
+            <th><input st-search="id" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="name" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="email" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="acl_user.value" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="provider" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="createdAt" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="confirmed" class="input-sm form-control" type="search"/></th>
+            <th><input st-search="revokeBefore" class="input-sm form-control" type="search"/></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in usersTable">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>
+			  <span ng-repeat="role in user.acl_user.value">
+				<span class="label" ng-class="role == 'admins' ? 'label-danger' : 'label-default'">{{role}}</span>
+			  </span>
+			</td>
+            <td><i class="fa fa-m fa-{{user.provider}}"></i> {{user.provider | ucfirst}}</td>
+            <td>{{user.createdAt | date:'medium'}}</td>
+            <td>{{user.confirmed | date:'medium'}}</td>
+            <td>{{user.revokeBefore | date:'medium'}}</td>
+            <td>
+              <span class="glyphicon glyphicon-ok pointer text-success" aria-hidden="true"
+                    ng-show="user.enabled"
+                    ng-click="toggleEnabled(user)">
+              </span>
+              <span class="glyphicon glyphicon-remove pointer text-danger" aria-hidden="true" 
+                    ng-show="!user.enabled"
+                    ng-click="toggleEnabled(user)">
+              </span>
+              <span class="glyphicon glyphicon-lock pointer" aria-hidden="true"
+                    ng-click="user.togglePassword= !user.togglePassword">
+              </span>
+              <i class="fa fa-ticket pointer" ng-click="toggleTokens(user)"></i>
+
+              <div ng-show="user.togglePassword" class="input-group fadeInRight">
+                <input type="password" class="form-control" placeholder="New password" ng-model="user.newPass">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click="changePass(user)">
+                    <span class="glyphicon glyphicon-floppy-disk pointer" aria-hidden="true"></span>
+                  </button>
+                </span>
+              </div>
+
+              <div ng-show="user.toggleTokens" class="zoomIn">
+                <table st-table="persistTokens" class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Token</th>
+                      <th>User Agent</th>
+                      <th>Created</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="token in user.tokens">
+                      <td>{{ token.token | limitTo: 10 }}</td>
+                      <td><div ng-ua-icons="{{token.ua}}"></div></td>
+                      <td>{{token.createdAt | date:'medium'}}</td>
+                      <td><span class="glyphicon glyphicon-remove pointer text-danger" aria-hidden="true" ng-click="revoke(user.userId, token.id, token.token)"></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

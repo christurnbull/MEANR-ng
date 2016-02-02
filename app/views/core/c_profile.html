@@ -1,0 +1,95 @@
+<update-title title="{{meta.title}}"></update-title>
+<update-meta property="og:title" content="{{meta.title}}" /></update-meta>
+<update-meta name="description" content="{{meta.description}}"></update-meta>
+<update-meta property="og:description" content="{{meta.description}}" /></update-meta>
+<update-meta property="og:url" content="{{meta.url}}" /></update-meta>
+
+<div class="container-fluid">
+  <div class="row">
+	<div class="col-md-4">
+    </div>
+	<div class="col-md-4">
+	  <h4>User Profile</h4>
+	  
+	  <ng-include src="'views/core/c_apiMessage.html'"></ng-include>
+
+      <div class="alert alert-warning" ng-show="$storage.userCapabilities.noEmail">
+        <strong>Missing email address.</strong> Please save an email address to confirm you account
+      </div>
+	  <div class="alert alert-warning" ng-show="!$storage.userCapabilities.confirmed && !$storage.userCapabilities.noEmail">
+        <strong>Unconfirmed Account.</strong> Please confirm your account using the email we sent. 
+        <label class="pointer"><a ng-click="resend()">Re-send email</a></label>
+      </div>
+	  
+	  <form name="form">
+        <div class="provider-profile" ng-show="$storage.userCapabilities.provider">
+          <img ng-src="{{$storage.userCapabilities.passport.avatarUrl}}" class="profile-image img-circle provider-img">
+          Signed in with <label>{{$storage.userCapabilities.provider | ucfirst }}</label> <i class="fa fa-m fa-{{$storage.userCapabilities.provider}}"></i>
+        </div>
+        <div style="margin-bottom: 25px" class="input-group">
+           <label class="input-group-addon" for="userId">User Id</label>
+           <input ng-model="formData.userId" required type="number" class="form-control" id="userId" name="userId" disabled>
+        </div>
+        <div style="margin-bottom: 25px" class="input-group">
+           <label class="input-group-addon" for=""><i class="glyphicon glyphicon-envelope"></i></label>
+           <input ng-model="formData.email" required type="email" class="form-control" id="" name="email" placeholder="Email Address" ng-disabled="!$storage.userCapabilities.noEmail">
+        </div>
+        <div style="margin-bottom: 25px" class="input-group">
+           <label class="input-group-addon" for=""><i class="glyphicon glyphicon-user"></i></label>
+           <input ng-model="formData.name" required type="text" class="form-control" id="" name="name" placeholder="Name" ng-disabled="$storage.userCapabilities.provider">
+        </div>
+        <div style="margin-bottom: 25px" class="input-group" ng-show="!$storage.userCapabilities.provider">
+           <label class="input-group-addon" for=""><i class="glyphicon glyphicon-lock"></i></label>
+           <button class="btn btn-block btn-warning ng-response-button" ng-response-button="reset()">
+              Reset Password
+            </button>
+        </div>
+		<div style="margin-top:10px" class="form-group" ng-hide="$storage.userCapabilities.provider && !$storage.userCapabilities.noEmail">
+		  <div class="col-sm-12">
+            <button type="button" class="btn btn-block btn-primary ng-response-button"
+              ng-response-button="save(form)" submit="form">
+              Save
+            </button>
+		  </div>
+		</div>
+		
+      </form>      
+	</div>
+    <div class="col-md-4">
+    </div>
+  </div>
+  <br>
+  <div class="row" ng-show="persistTokens[0]">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+      <h4>Persistent Tokens</h4>
+      <table st-table="persistTokensTable" st-safe-src="persistTokens" class="table table-striped">
+        <thead>
+          <tr>
+            <th st-sort="token">Token</th>
+            <th st-sort="provider">Provider</th>
+            <th st-sort="ua">User Agent</th>
+            <th st-sort="createdAt">Created</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="token in persistTokensTable">
+            <td><div title="{{token.token}}">{{ token.token | limitTo: 10 }}...</div></td>
+            <td><i title="{{token.provider | ucfirst }}" class="fa fa-m fa-{{token.provider}}"></i></td>
+            <td><div ng-ua-icons="{{token.ua}}"></div></td>
+            <td>{{token.createdAt | date:'medium'}}</td>
+            <td><span class="glyphicon glyphicon-remove pointer text-danger" aria-hidden="true" ng-click="revoke(token.id ,token.token)"></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+</div>
+
+
+
+

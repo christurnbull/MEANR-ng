@@ -1,0 +1,83 @@
+<update-title title="{{meta.title}}"></update-title>
+<update-meta property="og:title" content="{{meta.title}}" /></update-meta>
+<update-meta name="description" content="{{meta.description}}"></update-meta>
+<update-meta property="og:description" content="{{meta.description}}" /></update-meta>
+<update-meta property="og:url" content="{{meta.url}}" /></update-meta>
+
+<div class="container-fluid">
+  <div class="row">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-4">
+	  <h4>Sign Up</h4>
+	  <ng-include src="'views/core/c_apiMessage.html'"></ng-include>
+            
+      <div ng-show="signedup" class="col-md-offset-4 pulse">
+        <a href="#!/profile"><i class="fa fa-check fa-xxl btn btn-success"></i></a>
+      </div>
+      
+	  <form name="form" ng-show="!signedup">
+        <div class="input-group">
+          <label class="input-group-addon" for="name"><i class="glyphicon glyphicon-user"></i></label>
+          <input ng-model="formData.name" class="form-control" id="name"
+            placeholder="Name" name="name" type="text" ng-set-focus="name" set-focus-default>
+        </div>
+        
+        <div class="input-group" title="Email Address">
+          <label class="input-group-addon" for="email"><i
+              class="glyphicon glyphicon-envelope"
+              ng-class="form.email.$valid ?  'text-success-bright' : 'text-danger'">
+            </i>
+          </label>
+          <input ng-model="formData.email" class="form-control" id="email" 
+            placeholder="Email Address" name="email" type="email" required
+            uib-tooltip="Must be an email address"
+            ng-focus="form.email.$focus=true" ng-blur="form.email.$focus=false" ng-set-focus="email"
+            tooltip-is-open="!form.email.$valid && form.email.$focus && form.email.$dirty"
+            tooltip-placement="right" tooltip-class="has-warning-{{form.trySubmit}}" tooltip-trigger="none">
+        </div>
+        
+        <div class="input-group"  title="Confirm password">
+          <label class="input-group-addon" for="password"><i
+              class="glyphicon glyphicon-lock"
+              ng-class="form.password.$valid ?  'text-success-bright' : 'text-danger'">
+            </i>
+          </label>
+          <input ng-model="formData.password" class="form-control" id="password"
+            placeholder="Password" name="password" type="password" required ng-pattern="passwordRegex"
+            uib-tooltip="Must at least 6 chararcters and contain 1 number, lowercase and uppercase"
+            ng-focus="form.password.$focus=true" ng-blur="form.password.$focus=false" ng-set-focus="password"
+            tooltip-is-open="!form.password.$valid && form.password.$focus && form.password.$dirty"
+            tooltip-placement="right" tooltip-class="has-warning-{{form.trySubmit}}" tooltip-trigger="none">
+        </div>
+   
+        <div class="input-group"  title="Confirm password">
+          <label class="input-group-addon" for="cpassword"><i
+              class="glyphicon glyphicon-lock"
+              ng-class="form.cpassword.$valid ?  'text-success-bright' : 'text-danger'">
+            </i>
+          </label>
+          <input ng-model="formData.cpassword" class="form-control" id="cpassword" 
+            placeholder="Confirm Password" name="cpassword" type="password" required match="formData.password"
+            uib-tooltip="Passwords must be the same"
+            ng-focus="form.cpassword.$focus=true" ng-blur="form.cpassword.$focus=false" ng-set-focus="cpassword"
+            tooltip-is-open="!form.cpassword.$valid && form.cpassword.$focus && form.cpassword.$dirty"
+            tooltip-placement="right" tooltip-class="has-warning-{{form.trySubmit}}" tooltip-trigger="none">
+        </div>
+        
+		<div class="form-group">
+		  <div class="col-sm-12">
+            <button type="button" class="btn btn-block btn-default ng-response-button"
+                ng-response-button="save(form)" submit="form"
+                ng-class="{'btn-success' : form.$valid }">
+              Sign Up
+            </button>
+		  </div>
+		</div>
+	  </form>	  
+
+	</div>
+	<div class="col-sm-4"></div>
+  </div>
+</div>
+
+

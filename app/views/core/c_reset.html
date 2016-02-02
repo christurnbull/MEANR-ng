@@ -1,0 +1,61 @@
+<update-title title="{{meta.title}}"></update-title>
+<update-meta property="og:title" content="{{meta.title}}" /></update-meta>
+<update-meta name="description" content="{{meta.description}}"></update-meta>
+<update-meta property="og:description" content="{{meta.description}}" /></update-meta>
+<update-meta property="og:url" content="{{meta.url}}" /></update-meta>
+
+<div class="container-fluid">
+  <div class="row">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-4">
+	  <h4>Reset Password</h4>
+	  <ng-include src="'views/core/c_apiMessage.html'"></ng-include>
+      
+	  <form name="form">
+        <div class="input-group"  title="Confirm password">
+          <label class="input-group-addon" for="password"><i
+              class="glyphicon glyphicon-lock"
+              ng-class="form.password.$valid ?  'text-success-bright' : 'text-danger'">
+            </i>
+          </label>
+          <input ng-model="formData.password" class="form-control" id="password" 
+            placeholder="Password" name="password" type="password" required ng-pattern="passwordRegex"
+            uib-tooltip="Must at least 6 chararcters and contain 1 number, lowercase and uppercase"
+            ng-focus="form.password.$focus=true" ng-blur="form.password.$focus=false" ng-set-focus="password" set-focus-default
+            tooltip-is-open="!form.password.$valid && form.password.$focus && form.password.$dirty"
+            tooltip-placement="right" tooltip-class="has-warning-{{form.trySubmit}}" tooltip-trigger="none">
+        </div>
+   
+        <div class="input-group"  title="Confirm password">
+          <label class="input-group-addon" for="cpassword"><i
+              class="glyphicon glyphicon-lock"
+              ng-class="form.cpassword.$valid ?  'text-success-bright' : 'text-danger'">
+            </i>
+          </label>
+          <input ng-model="formData.cpassword" class="form-control" id="cpassword" 
+            placeholder="Confirm Password" name="cpassword" type="password" required match="formData.password"
+            uib-tooltip="Passwords must be the same"
+            ng-focus="form.cpassword.$focus=true" ng-blur="form.cpassword.$focus=false" ng-set-focus="cpassword"
+            tooltip-is-open="!form.cpassword.$valid && form.cpassword.$focus && form.cpassword.$dirty"
+            tooltip-placement="right" tooltip-class="has-warning-{{form.trySubmit}}" tooltip-trigger="none">
+        </div>
+		
+		<div style="margin-top:10px" class="form-group">
+		  <div class="col-sm-12">            
+            <button type="button" class="btn btn-block btn-default ng-response-button"
+                ng-response-button="reset(form)" submit="form"
+                ng-class="{'btn-success' : form.$valid }">
+              Reset
+            </button>
+		  </div>
+		</div>
+		
+	  </form>	  
+	</div>
+	<div class="col-sm-4"></div>
+  </div>
+</div>
+
+
+
+
