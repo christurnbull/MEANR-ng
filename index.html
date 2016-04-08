@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html class="no-js ng-landing-html">
   <head>
     <title>MEANr - a MEAN relational stack</title>
 	<meta name="description" content="A Mysql Express Angular Node relational stack">
@@ -10,48 +10,54 @@
 	<meta property="og:image" content="https://meanr.io/images/meanr-icon-128.png" />
 	<meta property="og:site_name" content="MEANr" />
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width">
     <base href="/#!">
-    <style>
-      [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-        display: none !important;
-      }
-      .sk-spinner-pulse {
-	  width: 40px;
-	  height: 40px;
-	  margin: 40px auto;
-	  background-color: #fff;
-	  border-radius: 100%;
-	  -webkit-animation: sk-pulseScaleOut 1s infinite ease-in-out;
-			  animation: sk-pulseScaleOut 1s infinite ease-in-out;
-      }
-      @-webkit-keyframes sk-pulseScaleOut {
-        0% {
-          -webkit-transform: scale(0);
-                  transform: scale(0);
-        }
-        100% {
-          -webkit-transform: scale(1);
-                  transform: scale(1);
-          opacity: 0;
-        }
-      }
-      @keyframes sk-pulseScaleOut {
-        0% {
-          -webkit-transform: scale(0);
-                  transform: scale(0);
-        }
-        100% {
-          -webkit-transform: scale(1);
-                  transform: scale(1);
-          opacity: 0;
-        }
-      }
-    </style>
+    	<style>
+	  .ng-landing-html {
+		background: #6B728A;
+		height: 100%;
+		display: table;
+		margin: auto;
+	  }
+	  .ng-landing-body {
+		background: #6B728A;
+		height: 100%;
+		display: table-cell;
+		vertical-align: middle;
+	  }
+	  .ng-landing {
+		color: #fff;
+	  }
+	  .sk-spinner-pulse {
+		width: 40px;
+		height: 40px;
+		margin: 40px auto;
+		background-color: #fff;
+		border-radius: 100%;
+		-webkit-animation: sk-pulseScaleOut 1s infinite ease-in-out;
+				animation: sk-pulseScaleOut 1s infinite ease-in-out; }
+
+	  @-webkit-keyframes sk-pulseScaleOut {
+		0% {
+		  -webkit-transform: scale(0);
+				  transform: scale(0); }
+		100% {
+		  -webkit-transform: scale(1);
+				  transform: scale(1);
+		  opacity: 0; } }
+
+	  @keyframes sk-pulseScaleOut {
+		0% {
+		  -webkit-transform: scale(0);
+				  transform: scale(0); }
+		100% {
+		  -webkit-transform: scale(1);
+				  transform: scale(1);
+		  opacity: 0; } }
+	</style>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     
-    <!-- cdn:css --
+    <!-- cdn:css --><!--
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/4.12.0/bootstrap-social.min.css" />
@@ -74,14 +80,14 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/core/c_animations.css">
     <link rel="stylesheet" href="styles/core/c_customBootstrap.css">
-    <link rel="stylesheet" href="styles/core/c_uiBootstrap.css">
+    <link rel="stylesheet" href="styles/core/c_loadingBar.css">
     <link rel="stylesheet" href="styles/core/c_main.css">
     <link rel="stylesheet" href="styles/core/c_meanr.css">
-    <link rel="stylesheet" href="styles/core/c_loadingBar.css">
     <link rel="stylesheet" href="styles/core/c_smartTable.css">
     <link rel="stylesheet" href="styles/core/c_stripePayments.css">
-    <link rel="stylesheet" href="styles/core/c_animations.css">
+    <link rel="stylesheet" href="styles/core/c_uiBootstrap.css">
     <!-- endbuild -->
 		
 	<script>
@@ -92,63 +98,46 @@
 	  ga('create', 'UA-xxxxxx-1', 'none');
 	</script>
   </head>
-  <body>
+  <body class="ng-landing-body">
+	
+	<div class="ng-landing">
+	  <div class="sk-spinner sk-spinner-pulse"></div>
+	  <div>Loading https://meanr.io</div>
+	</div>
     
-    <!-- landing-block - gets removed from dom when angular is finished loading -->
-    <div class="header-container ng-landing-remove">
-
-      <header class="header-container">
-        <div class="header-content">
-          <div class="header-content-inner">
-            <p>https://meanr.io</p>
-            <div class="sk-spinner-pulse"></div>
-            <p>Loading...</p>
-          </div>
-        </div>
-      </header>
-
-    </div>
-    <!-- /landing-block -->
-    
-    
-    <div ng-app="ngApp" ng-cloak ng-landing>      
+    <div ng-app="ngApp" ng-cloak ng-landing>
       <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
       <![endif]-->
-      
-      <!-- replaces static landing-block navbar and header with dynamic content-->
-      <div ng-class="path=='/' ? 'header-container' : 'header-nocontainer'" ng-controller="HeaderCtrl">
 
-        <nav ng-if="navbar" class="navbar navbar-fixed-top fadeIn" ng-class="path=='/' ? 'navbar-default' : 'navbar-inverse'"
-             du-scrollspy="ng-view-container">
-          <div class="">
+      <!-- Add your site or application content here -->
+      <!-- Navigation -->
+      <div ng-controller="HeaderCtrl">
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-              <button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
               </button>
-              <a href="#!/" ng-click="navbarCollapsed = true">
+
+              <a href="#!/home">
                 <span class="navbar-brand meanr-brand">
                   <span class="text-mysql">M</span><span class="text-express">E</span><span class="text-angular">A</span><span class="text-node">N</span><span class="text-black">r</span>
                 </span>
               </a>
-            </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="navbar-collapse" uib-collapse="navbarCollapsed" ng-click="navbarCollapsed = true">
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse" nav-collapse>
               <ul class="nav navbar-nav">
                 <li><a href="#!/about">About</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
-                <li>
-                  <a ng-show="!$storage.token" href="#!/signin">Sign In</a>
-                </li>
-                <li>
-                  <a ng-show="!$storage.token" href="#!/signup">Sign Up</a>
-                </li>
+                <li><a ng-show="!$storage.token" href="#!/signin">Sign In</a></li>
+                <li><a ng-show="!$storage.token" href="#!/signup">Sign Up</a></li>
                 <li title="Admin Dashboard">
                   <a ng-show="$storage.userCapabilities.isAdmin" href="#!/admin/users"><i class="fa fa-cogs fa-m"></i></a>
                 </li>
@@ -162,83 +151,11 @@
             </div>
             <!-- /.navbar-collapse -->
           </div>
-          <!-- /.container-fluid -->
-        </nav>
-
-        <!-- frontpage header -->
-        <header ng-if="path=='/'" class="header-container" id="mainHeader">
-          <div class="header-content">
-            <div class="header-content-inner">
-
-              <div class="meanr-title rollIn" ng-show="title">
-                <div class="well meanr-title-well">
-                  <span class="text-mysql">M</span><span class="text-express">E</span><span class="text-angular">A</span><span class="text-node">N</span><span class="text-black">r</span>
-                  <div class="subtitle">A MEAN relational stack</div>                    
-                </div>
-              </div>
-              <br><br><br>
-              <a href="#section1" du-smooth-scroll>
-                <i class="ion-chevron-down fa-5x fadeIn" ng-show="chevron" style="color: white;"></i>
-              </a>
-              
-            </div>
-          </div>
-        </header>
-        <!-- /frontpage header -->
-        
-        <div ng-if="fork" class="fadeIn">
-        <a href="https://github.com/christurnbull/MEANr"><img style="position: absolute; top: 50px; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
-        </div>
-        
+          <!-- /.container -->
+      </nav>
       </div>
-      
 
-      <div ng-view="" class="ng-view-container" id="ng-view-container"></div>
-  
-      
-      <footer id="footer">
-        <div class="container">
-          <div class="row">
-            <br>
-            <div class="col-xs-6 col-sm-6 col-md-3 column">          
-                <h4>Information</h4>
-                <ul class="nav">
-                  <li><a href="#!/">About Us</a></li>
-                  <li><a href="#!/">Terms &amp; Conditions</a></li>
-                  <li><a href="#!/">Privacy Policy</a></li>
-                </ul> 
-              </div>
-            <div class="col-xs-6 col-md-3 column">          
-                <h4>Follow Us</h4>
-                <ul class="nav">
-                  <li><a href="#!/"><i class="icon ion-social-twitter fa-2x"></i> Twitter</a></li>
-                  <li><a href="#!/"><i class="icon ion-social-facebook fa-2x"></i> Facebook</a></li>
-                  <li><a href="#!/"><i class="icon ion-social-google fa-2x"></i> Google+</a></li>
-                </ul> 
-            </div>
-            <div class="col-xs-6 col-md-3 column">          
-                <h4>Contact Us</h4>
-                <ul class="nav">
-                  <li><a href="#!/"><i class="fa fa-map-marker"></i> Main Office, Springfield, OB1 KNB</a></li>
-                  <li><a href="#!/"><i class="icon ion-email"></i> info@example.com</a></li>
-                  <li><a href="#!/"><i class="icon ion-ios-telephone"></i> London +44 020 123 456 789</a></li>
-                  <li><a href="#!/"><i class="icon ion-ios-telephone"></i> New York +1 123 456 789</a></li>
-                </ul> 
-            </div>
-            <div class="col-xs-6 col-md-3 column">          
-                <ul class="nav text-center">
-                  <li><a href="https://github.com/christurnbull/MEANr"><i class="ion-social-github fa-xl"></i></a></li>
-                </ul> 
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="text-center">
-              <h6>Copyright © 2016 MEANr. All Rights Reserved.</h6>              
-            </div>
-          </div>
-        </div>
-      </footer>      
+      <div ng-view=""></div>
 
       <!-- build:js(.) scripts/oldieshim.js -->
       <!--[if lt IE 9]>
@@ -247,7 +164,7 @@
       <![endif]-->
       <!-- endbuild -->
       
-      <!-- cdn:js --
+      <!-- cdn:js --><!--
       <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular-resource.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular-sanitize.min.js"></script>
@@ -297,8 +214,6 @@
       <script src="../bower_components/ua-parser-js/src/ua-parser.js"></script>
       <script src="../bower_components/ng-ua-icons/ngUaIcons.js"></script>
       <script src="../bower_components/ng-response-button/ngResponseButton.js"></script>
-      <script src="../bower_components/angular-scroll-animate/dist/angular-scroll-animate.js"></script>
-      <script src="../bower_components/angular-scroll/angular-scroll.js"></script>
       <!-- endbower -->
       <!-- endbuild -->
 
@@ -326,6 +241,7 @@
       <script src="scripts/core/controllers/c_routes.js"></script>
       <script src="scripts/core/controllers/c_banned.js"></script>
       <script src="scripts/core/controllers/c_JSNLog.js"></script>
+      <script src="scripts/core/directives/c_navCollapse.js"></script>
       <script src="scripts/core/directives/c_ngSocialShare.js"></script>
       <script src="scripts/core/directives/c_ngLanding.js"></script>
       <script src="scripts/core/filters/c_parseJson.js"></script>

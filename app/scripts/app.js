@@ -19,7 +19,6 @@ angular
     'ui.bootstrap',
     'angular.filter',
     'smart-table',
-    'nvd3',
     'validation.match',
     'updateMeta',
     'angularPayments',
@@ -29,15 +28,18 @@ angular
     'ngStorage',
     'angular-loading-bar',
     'angulartics',
-    'angulartics.google.analytics'
+    'angulartics.google.analytics',
+    'oc.lazyLoad',
+    'angular-scroll-animate',
+    'duScroll'
   ])
   .constant('appCfg', {
     appName: 'MEANr',
     host: {
       name: 'http://0.0.0.0:3000',
       path: ''
-//        name:'https://meanr.io',
-//        path:'/api'
+//             name:'https://meanr.io',
+  //            path:'/api'
     }
   })
   .config(function($routeProvider, $locationProvider) {

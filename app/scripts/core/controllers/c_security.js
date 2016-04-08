@@ -15,8 +15,6 @@ angular.module('ngApp')
      */
     var api = c_api;
     $scope.api = api;
-    var chart = c_chart;
-    $scope.chart = chart;
     $scope.meta = c_metaUpdate();
 
 
@@ -56,17 +54,25 @@ angular.module('ngApp')
     /**
      * Private
      */
+    function getD3Config() {
+
+      c_chart.then(function(cfg) {
+        $scope.chart = cfg;
+        getData($scope.serverFilter.data);
+      });
+    }
+
     function getData(criteria) {
 
       api.admin.audit(criteria, function(res) {
         $scope.audit = res;
-        chart.setData(res);
+        $scope.chart.setData(res);
       }, function(res) {
         api.message.set(res);
       });
     }
 
-    getData($scope.serverFilter.data);
+    getD3Config();
 
 
 

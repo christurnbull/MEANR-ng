@@ -1,0 +1,56 @@
+/* apiMessages */
+.apiMessage.ng-enter {  animation: fadeIn 1s;  }
+.apiMessage.ng-leave {  animation: fadeOut 1s; }
+.apiMessageAttn.ng-enter {  animation: bounce 1s;  }
+.apiMessageAttn.ng-leave {  animation: fadeOut 1s; }
+
+/* animate.css */
+/* http://daneden.github.io/animate.css/ */
+.fadeIn.ng-hide-remove { animation: fadeIn 1s; }
+.fadeIn.ng-enter { animation: fadeIn 1s; }
+.fadeInUp.ng-hide-remove { animation: fadeInUp 1s; }
+.fadeInDown.ng-hide-remove { animation: fadeInDown 1s; }
+.fadeOut.ng-hide-add { animation: fadeOut 1s; }
+.fadeInRight.ng-hide-remove { animation: fadeInRight 1s; }
+.fadeInLeft.ng-hide-remove { animation: fadeInLeft 1s; }
+.fadeOutRight.ng-hide-add { animation: fadeOutRight 1s; }
+.fadeOutLeft.ng-hide-add { animation: fadeOutLeft 1s; }
+.zoomIn.ng-hide-remove { animation: zoomIn 1s; }
+.zoomOut.ng-hide-add { animation: zoomOut 1s; }
+.slideInDown.ng-hide-remove { animation: slideInDown 1s; }
+.slideInUp.ng-hide-remove { animation: slideInUp 1s; }
+.slideOutUp.ng-hide-add { animation: slideOutUp 1s; }
+.slideInRight.ng-hide-remove { animation: slideInRight 1s; }
+.slideInLeft.ng-hide-remove { animation: slideInLeft 1s; }
+.slideOutLeft.ng-hide-add { animation: slideOutLeft 1s; }
+.slideOutRight.ng-hide-add { animation: slideOutRight 1s; }
+.pulse.ng-hide-remove { animation: pulse 1s; }
+.rollIn.ng-hide-remove { animation: rollIn 1s; }
+.lightSpeedIn.ng-hide-remove { animation: lightSpeedIn 1s; }
+
+
+/* http://embed.plnkr.co/oPrpTmhWCeR8zz2iiYSf/preview *
+.ngMessages.ng-active-add {
+  transition: 0.5s linear all;
+  background-color: lightgray;
+  border-radius: 4px;
+}
+.ngMessages.ng-inactive-add {
+  background-color: transparent;
+}
+
+.ngMessage.ng-enter {
+  transition: 0.5s linear all;
+  opacity: 0;
+}
+.ngMessage.ng-enter-active {
+  opacity: 1;
+}
+.ngMessage.ng-leave {
+  transition: 0.5s linear all;
+}
+.ngMessage.ng-leave-active {
+  opacity: 0;
+}
+*/
+

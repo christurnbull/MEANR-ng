@@ -1,29 +1,23 @@
-<update-title title="{{meta.title}}"></update-title>
-<update-meta property="og:title" content="{{meta.title}}" /></update-meta>
-<update-meta name="description" content="{{meta.description}}"></update-meta>
-<update-meta property="og:description" content="{{meta.description}}" /></update-meta>
-<update-meta property="og:url" content="{{meta.url}}" /></update-meta>
-
-<div class="row">
+<div class="row" oc-lazy-load="chart.deps">
   <div class="col-md-4">
-    <div uib-dropdown>
+    <span uib-dropdown>
       <a href id="simple-dropdown" uib-dropdown-toggle>Select property 1</a>
-      <ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
+      <ul uib-dropdown-menu>
         <li ng-repeat="property in chart.hbar.dropdown">
           <a ng-if="property.substring(0,1)!='-'" href ng-click="chart.setData(null,property,null)">{{property | ucfirst}}</a>
           <div ng-if="property.substring(0,1)=='-'" class="divider"></div>
         </li>
       </ul>
-    </div>
-    <div uib-dropdown>
+    </span>
+    <span uib-dropdown>
       <a href id="simple-dropdown" uib-dropdown-toggle>Select property 2</a>
-      <ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
+      <ul uib-dropdown-menu>
         <li ng-repeat="property in chart.hbar.dropdown">
           <a ng-if="property.substring(0,1)!='-'" href ng-click="chart.setData(null,null,property)">{{property | ucfirst}}</a>
           <div ng-if="property.substring(0,1)=='-'" class="divider"></div>
         </li>
       </ul>
-    </div>
+    </span>
     <nvd3 options="chart.hbar.options" data="chart.hbar.data"></nvd3>
   </div>
   <div class="col-md-4">

@@ -1,0 +1,84 @@
+/* general */
+.text-success-bright {
+  color: limegreen;
+}
+.pointer{
+  cursor: pointer;
+}
+.right{
+  float: right;
+}
+.left{
+  float: left;
+}
+.float-center{
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+form .input-group{
+  margin-bottom: 25px;
+}
+.provider-profile {
+  padding: 15px;
+}
+.provider-profile .provider-img {
+  width: 64px;
+}
+.no-underline:hover{
+  text-decoration: none;
+}
+
+
+/* font awesome */
+.fa-m{  font-size: 1.4em; }
+.fa-l{  font-size: 4em; }
+.fa-xl{  font-size: 7em; }
+.fa-xxl{  font-size: 12em; }
+
+
+/* form validation */
+.has-warning- .tooltip-inner {
+  background-color: #fcf8e3;
+  color: #8a6d3b;
+  font-size: small;
+}
+.has-warning- .tooltip-arrow {
+  border-right-color: #8a6d3b !important;
+}
+.has-warning-.tooltip.right {
+  height: 50px;
+}
+.passreset .has-warning-.tooltip.right {
+  margin-left: 38px;
+}
+
+.has-warning-error .tooltip-inner {
+  background-color: crimson;
+  color: white;
+  font-size: small;
+}
+.has-warning-error .tooltip-arrow {
+  border-right-color: crimson !important;
+}
+.has-warning-error.tooltip.right {
+  height: 50px;
+}
+.passreset .has-warning-error.tooltip.right {
+  margin-left: 38px;
+}
+
+
+/* social buttons */
+.btn.ng-social-share {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.btn.ng-social-share .ion-share{
+  font-size: 1.6em;
+}
+.btn.ng-social-share label{
+  position: relative;
+  top: -2px;
+  cursor: pointer;
+}

@@ -4,95 +4,111 @@
 <update-meta property="og:description" content="{{meta.description}}" /></update-meta>
 <update-meta property="og:url" content="{{meta.url}}" /></update-meta>
 
-<div class="container-fluid">
+
+<div class="header-view">
   
-  <div class="row">
-	<div class="col-lg-12 text-center">
-      <div class="meanr-title-container">
-        <div class="meanr-title fadeInDown" ng-show="title">
-          <span class="text-mysql">M</span><span class="text-express">E</span><span class="text-angular">A</span><span class="text-node">N</span><span class="text-black">r</span>
-          <div class="subtitle">A MEAN relational stack</div>
+  <section class="container-fluid" id="section1">
+    <div class="meanr-slogan text-center v-center">
+      <h3>
+        <strong>
+          <a href="https://www.mysql.com/"><span class="text-mysql">Mysql</span></a>
+          <a href="http://expressjs.com/"><span class="text-express">Express</span></a>
+          <a href="https://angularjs.org/"><span class="text-angular">Angular</span></a>
+          <a href="https://nodejs.org/en/"><span class="text-node">Node</span></a>
+        </strong>
+        <span class="text-black">relational</span>
+      </h3>
+    </div>
+  </section>
+  
+  <div class="carousel-container" id="carousel">
+    <uib-carousel active="0" interval="carousel.interval">
+      <uib-slide ng-repeat="slide in carousel.slides" index="$index"
+        class="fill" style="background-image:url('{{slide.image}}'); background-position: {{slide.pos}}">
+        <div class="carousel-caption">
+          <h3><kbd class="bg-primary">{{slide.text}}</kbd></h3>
         </div>
-      </div>
-	</div>
+      </uib-slide>
+    </uib-carousel>
   </div>
-  
-  <div class="row">
-    
-	<div class="col-md-4 text-center">
-      <div class="well">
-		<div class="meanr-slogan">
-		  <h3>
-			<strong>
-			  <a href="https://www.mysql.com/"><span class="text-mysql">Mysql</span></a>
-			  <a href="http://expressjs.com/"><span class="text-express">Express</span></a>
-			  <a href="https://angularjs.org/"><span class="text-angular">Angular</span></a>
-			  <a href="https://nodejs.org/en/"><span class="text-node">Node</span></a>
-			</strong>
-			<span class="text-black">relational</span>
-		  </h3>
-		</div>
-		<div class="meanr-icon-128 float-center">
-          <span class="text-mysql">M</span><span class="text-express">E</span><span class="text-angular">A</span><span class="text-node">N</span><span class="text-black">r</span>
-          <div class="subtitle">A MEAN relational stack</div>
-        </div><br>
-		<a ng-show="!$storage.token" href="#!/signin">
-			<button type="button" class="btn btn-success btn-lg">Sign In</button>
-		</a>
-		<a ng-show="!$storage.token" href="#!/signup">
-			<button type="button" class="btn btn-warning btn-lg">Sign Up</button>
-		</a>
-      </div>
-    </div>
-	
-    <div class="col-md-4 text-center">
-      <div class="">
-		<button ng-social-share="share"></button><br>
-		<iframe src="https://ghbtns.com/github-btn.html?user=christurnbull&repo=MEANr&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-		<iframe src="https://ghbtns.com/github-btn.html?user=christurnbull&repo=MEANr&type=follow&count=true&size=large" frameborder="0" scrolling="0" width="270px" height="30px"></iframe>
-		<div>MIT License</div>
-      </div>
-	  <div>
-        <div class="well" style="display: inline-flex;">
-          <div>
-            <a href="ionic"><button class="btn btn-primary">
-              <i class="icon ion-ionic fa-l"></i>
-              <div>Check out the MEANr Ionic App</div>
-              </button></a>
-          </div>
-          <div>
-            <h4>Buy me a beer <i class="ion-beer fa-m"></i></h4>
-            <img src="images/stripeLogo.png" width="100" height="50">
 
-            <button type="button" class="btn btn-info" uib-popover-template="'popover.tpl'">Donate</button>
-            <script type="text/ng-template" id="popover.tpl">
-              <div ng-if="!stripeLoaded" class="panel panel-default stripejs">
-                <div class="panel-body">
-                  <div class="jumbotron" style="background: white;">
-                    <i class="fa ion-load-c fa-spin fa-l"></i>
-                  </div>
-                </div>
+  <section class="container-fluid" id="section2">
+
+    <h1 class="text-center v-center" ng-show="!$storage.token">
+      <a href="#!/signin" class="no-underline">
+        <button type="button" class="btn btn-default btn-lg">Sign In</button>
+      </a> or
+      <a href="#!/signup">
+        <button type="button" class="btn btn-success btn-lg">Sign Up</button>
+      </a>
+    </h1>
+    <br><br>
+  	<div class="container">
+      <div class="row">
+          <div class="col-sm-4">
+            <div class="row">
+              <div class="col-sm-10 col-sm-offset-2 text-center">
+                <h3>Ionic</h3>
+                <p>Check out the MEANr Ionic App</p>
+                <a href="https://github.com/christurnbull/MEANr-ion">
+                  <i class="icon ion-ionic fa-5x" when-visible="tada"></i>
+                </a>
               </div>
-              <ng-include src="'views/core/c_donate.html'" onload="stripeLoaded=true"></ng-include>
-            </script>
+            </div>
           </div>
-          
-		</div>
-	  </div>
-    </div>
-	
-	<div class="col-md-4 text-center">
-      <div class="well">
-		<strong><h4>Why does the world need another MEAN stack?</h4></strong>
-		<p>Because sooner or later you will realize MongoDB probably <a href="http://www.sarahmei.com/blog/2013/11/11/why-you-should-never-use-mongod">isn't the right <i>choice</i>.</a></p>
-		<p>The relationship between data is as important</a> as the data itself. Life is a lot easier with ACID transactions.</p>
-		<p>And <a href="http://sitr.us/2011/08/26/cookies-are-bad-for-you.html">cookies aren't ideal</a> - using <a href="https://auth0.com/blog/2014/01/07/angularjs-authentication-with-cookies-vs-token/">tokens</a> is a great way to serve Angular webpages and ionic mobile apps</p>
-		<a href="#!/about"><button type="button" class="btn btn-primary btn-lg">Learn more</button></a>
+          <div class="col-sm-4 text-center">
+            <div class="row">
+              <div class="col-sm-10 col-sm-offset-1 text-center">
+                <button ng-social-share="share"></button><br>                
+                <br>
+                <iframe src="https://ghbtns.com/github-btn.html?user=christurnbull&repo=MEANr&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+                <iframe src="https://ghbtns.com/github-btn.html?user=christurnbull&repo=MEANr&type=follow&count=true&size=large" frameborder="0" scrolling="0" width="270px" height="30px"></iframe>
+                <p>MIT License</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4 text-center">
+            <div class="row">
+              <div class="col-sm-10 text-center">
+                <h3>Donate</h3>
+                <p>Buy me a beer <i class="ion-beer fa-2x"></i></p>
+                <img src="images/stripeLogo.png" width="100" height="50" 
+                  class="pointer" uib-popover-template="'popover.tpl'" when-visible="tada">
+                
+                <script type="text/ng-template" id="popover.tpl">
+                  <div ng-if="!stripeLoaded" class="panel panel-default stripejs">
+                    <div class="panel-body">
+                      <div class="jumbotron" style="background: white;">
+                        <i class="fa ion-load-c fa-spin fa-l"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <ng-include src="'views/core/c_donate.html'" onload="stripeLoaded=true"></ng-include>
+                </script>
+            
+              </div>
+            </div>
+          </div>
+      </div><!--/row-->
+      <div class="row"><br></div>
+    </div><!--/container-->
+  </section>
+  
+  <section class="container-fluid" id="section3">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2 text-center">
+          <h1>Why does the world need another MEAN stack?</h1>
+          <br>
+          <div class="lead">
+            <p>Because sooner or later you will realize MongoDB probably <a href="http://www.sarahmei.com/blog/2013/11/11/why-you-should-never-use-mongod">isn't the right <i>choice</i>.</a></p>
+            <p>The relationship between data is as important</a> as the data itself. Life is a lot easier with ACID transactions.</p>
+            <p>And <a href="http://sitr.us/2011/08/26/cookies-are-bad-for-you.html">cookies aren't ideal</a> - using <a href="https://auth0.com/blog/2014/01/07/angularjs-authentication-with-cookies-vs-token/">tokens</a> is a great way to serve Angular webpages and ionic mobile apps</p>
+            <br>
+            <a href="#!/about"><button type="button" class="btn btn-primary btn-lg">Learn more</button></a>
+          </div>
+          <br>          
       </div>
     </div>
-	
-  </div>
-  
-</div>
+  </section>
 
-<a href="https://github.com/christurnbull/MEANr"><img style="position: absolute; top: 0; right: 0; border: 0; margin-top: 50px;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+</div>
