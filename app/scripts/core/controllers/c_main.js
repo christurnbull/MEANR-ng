@@ -21,16 +21,6 @@ angular.module('ngApp')
     $scope.meta.title = 'MEANr - A MEAN relational stack';
     $scope.$storage = $localStorage;
 
-    // trigger animated title
-    $scope.title = false;
-    var animateTO = $timeout(function() {
-      $scope.title = true;
-    }, 200);
-
-    $scope.$on('$destroy', function() {
-      $timeout.cancel(animateTO);
-    });
-
 
     /**
      * Private
@@ -88,6 +78,45 @@ angular.module('ngApp')
       });
     };
 
+    $scope.tada = function($el) {
+      $el.removeClass('hidden');
+      $el.addClass('animated tada');
+    };
 
+    $scope.$on('duScrollspy:becameActive', function($event, $element, $target) {
+      $element.addClass('navbar-inverse');
+    });
+    $scope.$on('duScrollspy:becameInactive', function($event, $element, $target) {
+      $element.removeClass('navbar-inverse');
+    });
+
+    $scope.carousel = {
+      interval: 4000,
+      slides: [
+        {
+          image: 'https://pixabay.com/static/uploads/photo/2013/07/13/09/40/database-155892_960_720.png',
+          text: 'MySQL',
+          pos: '50% 50%'
+        },
+        {
+          image: 'https://pixabay.com/static/uploads/photo/2014/12/29/17/39/code-583073_960_720.jpg',
+          text: 'ExpressJS',
+          pos: '50% 50%'
+        },
+        {
+          image: 'https://pixabay.com/static/uploads/photo/2015/09/17/16/40/book-944462_960_720.jpg',
+          text: 'AngularJS 1.5.x',
+          pos: '60% 40%'
+        },
+        {
+          image: 'https://pixabay.com/static/uploads/photo/2015/04/23/17/41/node-js-736399_960_720.png',
+          text: 'NodeJS'
+        },
+        {
+          image: 'https://pixabay.com/static/uploads/photo/2015/10/30/10/02/matrix-1013611_960_720.jpg',
+          text: 'relational'
+        }
+      ]
+    };
 
   });

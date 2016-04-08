@@ -68,7 +68,7 @@ angular.module('ngApp')
           $http.get(host + '/user/capabilities/' + userId).then(function(response) {
             $rootScope.$storage.userCapabilities = response.data[0];
           });
-		                }]);
+		                                        }]);
       },
       signout: function() {
         // post signout so server can revoke token
@@ -78,7 +78,7 @@ angular.module('ngApp')
               Authorization: 'Bearer ' + $rootScope.$storage.token
             }
           });
-		        }]);
+		                                }]);
 
         delete $rootScope.$storage.token;
         delete $rootScope.$storage.userCapabilities;

@@ -54,13 +54,13 @@ angular.module('ngApp')
         var defaults = {
           placement: 'top',
           networks: [
-			              'facebook',
-			              'twitter',
-			              'linkedin',
-			              'pinterest',
-			              'reddit',
-			              'google'
-		            ],
+			                                                  'facebook',
+			                                                  'twitter',
+			                                                  'linkedin',
+			                                                  'pinterest',
+			                                                  'reddit',
+			                                                  'google'
+		                                          ],
           email: true,
           url: window.location.href,
           title: document.title,

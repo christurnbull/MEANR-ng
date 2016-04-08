@@ -1,0 +1,20 @@
+/* angular-loading-bar */
+#loading-bar .bar {
+  background: #83CD29;
+  height: 3px;
+  top: 54px;
+}
+#loading-bar .peg {
+  height: 3px;
+  -moz-box-shadow: #83CD29 1px 0 6px 1px;
+  -ms-box-shadow: #83CD29 1px 0 6px 1px;
+  -webkit-box-shadow: #83CD29 1px 0 6px 1px;
+  box-shadow: #83CD29 1px 0 6px 1px;
+}
+#loading-bar-spinner {
+  top: 65px;
+}
+#loading-bar-spinner .spinner-icon {
+  border-top-color:  #83CD29;
+  border-left-color: #83CD29;
+}

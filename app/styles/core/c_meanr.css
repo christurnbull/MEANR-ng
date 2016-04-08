@@ -1,0 +1,68 @@
+/* MEANr logos */
+.text-mysql { color: #00618A; }
+.text-express { color: #313E4B; }
+.text-angular { color: #A6120D; }
+.text-node { color: #83CD29; }
+.text-black { color: #000000; }
+.meanr-title-well {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+}
+.meanr-title {
+  font-family: 'Gruppo', cursive;
+  font-size: 5em;
+}
+.meanr-title .subtitle {
+  font-size: medium;
+  font-weight: 600;
+  margin-top: -20px;
+  color: #555;
+  margin-bottom: 25px;
+}
+.meanr-icon-128 {
+  border: solid darkgrey 1px;
+  background: white;
+  height: 128px;
+  width: 128px;
+  font-family: 'Gruppo', cursive;
+  font-size: 30px;
+  padding-top: 28px;
+}
+.meanr-icon-128 .subtitle {
+  font-size: xx-small;
+}
+.meanr-brand, .meanr-brand:hover{
+  font-family: 'Gruppo', cursive;
+  height: 53px;
+  background-color: white !important;
+}
+.meanr-slogan {
+  font-family: 'Gruppo', cursive;
+}
+
+
+/* About page */
+.row.even {
+  color: darkslategray;
+  padding: 50px;
+  font-size: large;
+}
+.row.odd {
+  background-color:#eee;
+  color: #00618A;
+  padding: 50px;
+  font-size: large;
+}
+.row.even a {  color: #A6120D; }
+.row.odd a {  color: #A6120D; }
+.about-icon-pad {
+  padding-top: 15px;
+}
+.list-group.about .list-group-item {
+  border: 0;
+  background: transparent;
+  padding-bottom: 0px;
+}
+.row.even .ng-enter {  animation: fadeIn 1s; }
+.row.odd .ng-enter {  animation: fadeIn 1s; }

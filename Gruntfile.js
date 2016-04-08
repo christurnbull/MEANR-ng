@@ -165,7 +165,18 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        ignorePath:  [/\.\.\//, '!socket.io.js']
+        ignorePath:  [/\.\.\//, '!socket.io.js'],
+        exclude: [
+          '../bower_components/es5-shim/es5-shim.js',
+          '../bower_components/json3/lib/json3.js',
+          '../bower_components/jquery/dist/jquery.js',
+          '../bower_components/bootstrap/dist/js/bootstrap.js',
+          '../bower_components/SHA-1/sha1.js',
+          '../bower_components/d3/d3.js', // nvd3 & dependencies added in c_chart.js service using ocLazyLoad
+          '../bower_components/nvd3/build/nv.d3.js',
+          '../bower_components/nvd3/build/nv.d3.css',
+          '../bower_components/angular-nvd3/dist/angular-nvd3.js'
+        ]
       }
     },
 
@@ -372,6 +383,50 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    // replace local files for cdn hosted
+    replace: {
+      cdncss: {
+        src: ['<%= yeoman.app %>/index.html'],
+        overwrite: true,  // overwrite matched source files
+        replacements: [
+          { from: '<!-- cdn:css --><!--', to: '<!-- cdn:css -->' },
+          { from: '../bower_components/bootstrap/dist/css/bootstrap.css', to: '' },
+          { from: '../bower_components/font-awesome/css/font-awesome.css', to: '' },
+          { from: '../bower_components/bootstrap-social/bootstrap-social.css', to: '' },
+          { from: '../bower_components/angular-loading-bar/build/loading-bar.css', to: '' },
+          { from: '../bower_components/nvd3/build/nv.d3.css', to: '' },
+          { from: '../bower_components/ionicons/css/ionicons.css', to: '' },
+          { from: '../bower_components/animate.css/animate.css', to: '' }
+        ]
+      },
+      cdnjs: {
+        src: ['<%= yeoman.app %>/index.html'],
+        overwrite: true,  // overwrite matched source files
+        replacements: [
+          { from: '<!-- cdn:js --><!--', to: '<!-- cdn:js -->' },
+          { from: '../bower_components/angular/angular.js', to: '' },
+          { from: '../bower_components/angular-resource/angular-resource.js', to: '' },
+          { from: '../bower_components/angular-sanitize/angular-sanitize.js', to: '' },
+          { from: '../bower_components/angular-animate/angular-animate.js', to: '' },
+          { from: '../bower_components/angular-touch/angular-touch.js', to: '' },
+          { from: '../bower_components/angular-route/angular-route.js', to: '' },
+          { from: '../bower_components/angular-messages/angular-messages.js', to: '' },
+          { from: '../bower_components/angular-bootstrap/ui-bootstrap-tpls.js', to: '' },
+          { from: '../bower_components/angulartics/src/angulartics.js', to: '' },
+          { from: '../bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js', to: '' },
+          { from: '../bower_components/socket.io-client/socket.io.js', to: '' },
+          { from: '../bower_components/fastclick/lib/fastclick.js', to: '' },
+          { from: '../bower_components/angular-cache/dist/angular-cache.js', to: '' },
+          { from: '../bower_components/jsnlog/jsnlog.js', to: '' },
+          { from: '../bower_components/angular-smart-table/dist/smart-table.js', to: '' },
+          { from: '../bower_components/angular-filter/dist/angular-filter.min.js', to: '' },
+          { from: '../bower_components/angular-loading-bar/build/loading-bar.js', to: '' },
+          { from: '../bower_components/oclazyload/dist/ocLazyLoad.js', to: '' },
+          { from: '../bower_components/ua-parser-js/src/ua-parser.js', to: '' }
+        ]
+      }
     }
   });
 
@@ -384,6 +439,8 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
+//      'replace:cdncss',
+//      'replace:cdnjs',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -407,13 +464,14 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
+    'replace:cdncss',
+    'replace:cdnjs',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
     'concat',
     'ngAnnotate',
     'copy:dist',
-    'cdnify',
     'cssmin',
     'uglify',
     'filerev',
